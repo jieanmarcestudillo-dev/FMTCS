@@ -27,10 +27,27 @@ Route::middleware('auth')->group(function () {
 
 # STARTS HERE ADMIN ROUTES
 
-Route::get('/admin/dashboard', function(){
-    return view('admin.dashboard');
-})->middleware(['auth','verified'])->name('admin.dashboard');
+// Route::get('/admin/dashboard', function(){
+//     return view('admin.dashboard');
+// })->middleware(['auth','verified'])->name('admin.dashboard');
+
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('adminDashboard', [Controller::class,'adminDashboard'])->name('adminDashboard');
+    Route::get('adminNewOrders', [Controller::class,'adminNewOrders'])->name('adminNewOrders');
+    Route::get('adminOrderDetails', [Controller::class,'adminOrderDetails'])->name('adminOrderDetails');
+    Route::get('adminProductCategories', [Controller::class,'adminProductCategories'])->name('adminProductCategories');
+    Route::get('adminViewGear', [Controller::class,'adminViewGear'])->name('adminViewGear');
+    Route::get('adminViewBolts', [Controller::class,'adminViewBolts'])->name('adminViewBolts');
+    Route::get('adminViewOthers', [Controller::class,'adminViewOthers'])->name('adminViewOthers');
+    Route::get('adminSalesReport', [Controller::class,'adminSalesReport'])->name('adminSalesReport');
+    Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
+});
 
 # ENDS HERE ADMIN ROUTES
+
+
+
+
+
 
 require __DIR__.'/auth.php';

@@ -85,7 +85,7 @@
                     </div>
                     <x-input-error :messages="$errors->get('password')" class="mt-2 alert alert-danger" role="alert"/>
                     <div class="mb-3 checkBox">
-                        <input type="checkbox" class="form-check-input ms-1" onclick="seePassword()">
+                        <input type="checkbox" class="form-check-input ms-1" onclick="loginPassword()">
                         <label class="form-check-label">Show Password</label>
                     </div>
                     <ul class="navbar-nav text-center">
@@ -99,5 +99,9 @@
             </div>
         </section>
     </section>
+
+     <!-- JS -->
+        <script src="{{ asset('/js/auth.js') }}"></script>
+    <!-- JS -->
 </body>
 </html>

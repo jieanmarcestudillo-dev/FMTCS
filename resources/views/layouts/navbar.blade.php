@@ -12,13 +12,13 @@
                 <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item mx-3">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#aboutSection">About</a>
             </li>
             <li class="nav-item mx-3">
-                <a class="nav-link" href="#">Services</a>
+                <a class="nav-link" href="#servicesSection">Services</a>
             </li>
             <li class="nav-item mx-3">
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link" href="#categorySection">Products</a>
             </li>
             </ul>
             <form class="d-flex mb-lg-0 mb-1">

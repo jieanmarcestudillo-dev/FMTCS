@@ -298,6 +298,13 @@ body.signup .back-image {
     margin-top: -2px !important;
 }
 
+.alert{
+    opacity: 0.8;
+    border-radius: 0;
+    text-align: center;
+    font-size: 12px;
+}
+
 /* ---   RESPONSIVENESS   --- */
 
 @media only screen and (min-width:320px) and (max-width: 780px) {
