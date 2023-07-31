@@ -9,7 +9,6 @@ Route::get('/', function () {
 });
 
 
-
 Route::get('viewGearCategory', [Controller::class,'viewGearCategory'])->name('viewGearCategory');
 Route::get('viewBoltsCategory', [Controller::class,'viewBoltsCategory'])->name('viewBoltsCategory');
 Route::get('viewOtherCategory', [Controller::class,'viewOtherCategory'])->name('viewOtherCategory');
@@ -25,5 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+# STARTS HERE ADMIN ROUTES
+
+Route::get('/admin/dashboard', function(){
+    return view('admin.dashboard');
+})->middleware(['auth','verified'])->name('admin.dashboard');
+
+# ENDS HERE ADMIN ROUTES
 
 require __DIR__.'/auth.php';

@@ -72,7 +72,8 @@
                 <a class='homeButton' href="/" data-title='Back to Home?'><i class="bi bi-house"></i></a>
                 <img class="img-thumbnail border-0 logo" src="{{ URL('/image/frontend/FMTCS.jpg')}}">
                 <p class="title mt-lg-3">CUSTOMER PORTAL</p>
-                <form>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
                     <div class="form-floating mb-3">
                         <x-text-input class="form-control" placeholder="Email" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username"/>
                         <label for="floatingInput" class="text-muted">Email</label>
