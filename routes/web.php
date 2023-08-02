@@ -1,6 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LogController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -27,10 +34,6 @@ Route::middleware('auth')->group(function () {
 
 # STARTS HERE ADMIN ROUTES
 
-// Route::get('/admin/dashboard', function(){
-//     return view('admin.dashboard');
-// })->middleware(['auth','verified'])->name('admin.dashboard');
-
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminDashboard', [Controller::class,'adminDashboard'])->name('adminDashboard');
     Route::get('adminNewOrders', [Controller::class,'adminNewOrders'])->name('adminNewOrders');
@@ -41,6 +44,15 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminViewOthers', [Controller::class,'adminViewOthers'])->name('adminViewOthers');
     Route::get('adminSalesReport', [Controller::class,'adminSalesReport'])->name('adminSalesReport');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
+
+
+    # --------------------------GET * data on the tables routes--------------------
+    Route::get('getAllOrders', [OrderController::class,'getAllOrders']);
+    Route::get('getAllOrderDetails', [OrderDetailController::class,'getAllOrderDetails']);
+    Route::get('getAllCategory', [CategoryController::class,'getAllCategories']);
+    Route::get('getAllLogs', [LogController::class,'getAllLogs']);
+    Route::get('getAllProducts', [ProductController::class,'getAllProducts']);
+    Route::get('getAllSuppliers', [SupplierController::class,'getAllSuppliers']);
 });
 
 # ENDS HERE ADMIN ROUTES

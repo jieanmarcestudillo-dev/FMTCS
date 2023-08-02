@@ -21,9 +21,7 @@ return new class extends Migration
             $table->integer('category');
             $table->integer('supplier');
             $table->integer('prod_serial');
-            $table->string('prod_pic1');
-            $table->string('prod_pic2');
-            $table->string('prod_pic3');
+            $table->string('prod_pic');
             $table->timestamps();
         });
     }
