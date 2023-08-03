@@ -1,5 +1,11 @@
 <?php
 
+/*********************************THINGS TO DO STARTS HERE*******************************************
+
+-Don't forget to revise the add products codes when it comes to the uploading of image on the addProduct Routes
+
+**********************************THINGS TO DO ENDS HERE*********************************************/
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LogController;
@@ -35,6 +41,7 @@ Route::middleware('auth')->group(function () {
 # STARTS HERE ADMIN ROUTES
 
 Route::middleware(['auth','verified'])->group(function () {
+
     Route::get('adminDashboard', [Controller::class,'adminDashboard'])->name('adminDashboard');
     Route::get('adminNewOrders', [Controller::class,'adminNewOrders'])->name('adminNewOrders');
     Route::get('adminOrderDetails', [Controller::class,'adminOrderDetails'])->name('adminOrderDetails');
@@ -45,14 +52,37 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminSalesReport', [Controller::class,'adminSalesReport'])->name('adminSalesReport');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
 
-
-    # --------------------------GET * data on the tables routes--------------------
-    Route::get('getAllOrders', [OrderController::class,'getAllOrders']);
-    Route::get('getAllOrderDetails', [OrderDetailController::class,'getAllOrderDetails']);
-    Route::get('getAllCategory', [CategoryController::class,'getAllCategories']);
-    Route::get('getAllLogs', [LogController::class,'getAllLogs']);
-    Route::get('getAllProducts', [ProductController::class,'getAllProducts']);
+    # -------------------------Supplier Routes--------------------
     Route::get('getAllSuppliers', [SupplierController::class,'getAllSuppliers']);
+    Route::get('getSupplier', [SupplierController::class, 'getSupplier']);
+    Route::get('updateSupplier', [SupplierController::class,'updateSupplier']);
+    Route::get('deleteSupplier', [SupplierController::class,'deleteSupplier']);
+    Route::get('addSupplier', [SupplierController::class,'addSupplier']);
+
+    # -------------------------Category Routes--------------------
+    Route::get('getAllCategory', [CategoryController::class,'getAllCategory']);
+    Route::get('getCategory', [CategoryController::class, 'getCategory']);
+    Route::get('updateCategory', [CategoryController::class,'updateCategory']);
+    Route::get('deleteCategory', [CategoryController::class,'deleteCategory']);
+    Route::get('addCategory', [CategoryController::class,'addCategory']);
+
+    # -------------------------Log Routes--------------------
+    Route::get('getAllLogs', [LogController::class,'getAllLogs']);
+    Route::get('getLogs', [LogController::class,'getLogs']);
+
+    # -------------------------Product Routes--------------------
+    Route::get('getAllProduct', [ProductController::class,'getAllProduct']);
+    Route::get('getProduct', [ProductController::class, 'getProduct']);
+    Route::get('updateProduct', [ProductController::class,'updateProduct']);
+    Route::get('deleteProduct', [ProductController::class,'deleteProduct']);
+    Route::get('addProduct', [ProductController::class,'addProduct']);
+
+    # -------------------------Order Routes--------------------
+    Route::get('getAllOrders', [OrderController::class,'getAllOrders']);
+    Route::get('getOrder', [ProductController::class, 'getOrder']);
+    Route::get('updateOrder', [ProductController::class,'updateOrder']);
+    Route::get('addOrder', [ProductController::class,'addOrder']);
+
 });
 
 # ENDS HERE ADMIN ROUTES
