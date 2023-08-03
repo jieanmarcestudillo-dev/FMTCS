@@ -36,13 +36,43 @@
                 <!-- NAV BAR -->
 
                 <!-- MAIN CONTENT -->
-
+                <div class="mainBar container">
+                    <div class="bg-body py-4 px-5 bg-body rounded shadow-lg">
+                        <ul class="nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">&nbsp;&nbsp;Pending&nbsp;&nbsp;</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">To Ship</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">To Received</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Completed</a>
+                            </li>
+                        </ul>
+                            <table id="newOrdersTable" class="table table-sm table-bordered text-center align-middle">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No.</th>
+                                        <th class="text-center">Order ID</th>
+                                        <th class="text-center">Customer</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Date</th>
+                                        <th class="text-center col-2">Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                    </div>
+                </div>
                 <!-- MAIN CONTENT -->
             </div>
         <!-- MAIN CONTENT -->
     </div>
 
     <!-- JS -->
+        <script src="{{ asset('/js/administrator/newOrders.js') }}"></script>
         <script src="{{ asset('/js/sideBar.js') }}"></script>
         <script src="{{ asset('/js/dateTime.js') }}"></script>
     <!-- JS -->

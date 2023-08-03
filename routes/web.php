@@ -41,7 +41,6 @@ Route::middleware('auth')->group(function () {
 # STARTS HERE ADMIN ROUTES
 
 Route::middleware(['auth','verified'])->group(function () {
-
     Route::get('adminDashboard', [Controller::class,'adminDashboard'])->name('adminDashboard');
     Route::get('adminNewOrders', [Controller::class,'adminNewOrders'])->name('adminNewOrders');
     Route::get('adminOrderDetails', [Controller::class,'adminOrderDetails'])->name('adminOrderDetails');
@@ -51,6 +50,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminViewOthers', [Controller::class,'adminViewOthers'])->name('adminViewOthers');
     Route::get('adminSalesReport', [Controller::class,'adminSalesReport'])->name('adminSalesReport');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
+});
 
     # -------------------------Supplier Routes--------------------
     Route::get('getAllSuppliers', [SupplierController::class,'getAllSuppliers']);
@@ -71,19 +71,18 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('getLogs', [LogController::class,'getLogs']);
 
     # -------------------------Product Routes--------------------
-    Route::get('getAllProduct', [ProductController::class,'getAllProduct']);
     Route::get('getProduct', [ProductController::class, 'getProduct']);
     Route::get('updateProduct', [ProductController::class,'updateProduct']);
     Route::get('deleteProduct', [ProductController::class,'deleteProduct']);
     Route::get('addProduct', [ProductController::class,'addProduct']);
 
     # -------------------------Order Routes--------------------
+    Route::get('getAllProducts', [ProductController::class,'getAllProducts']);
     Route::get('getAllOrders', [OrderController::class,'getAllOrders']);
     Route::get('getOrder', [ProductController::class, 'getOrder']);
     Route::get('updateOrder', [ProductController::class,'updateOrder']);
     Route::get('addOrder', [ProductController::class,'addOrder']);
 
-});
 
 # ENDS HERE ADMIN ROUTES
 

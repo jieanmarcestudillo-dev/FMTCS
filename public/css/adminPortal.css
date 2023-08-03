@@ -156,12 +156,27 @@ body{
 }
 
 .mainBar .card i{
-    font-size:2rem;
-    background-color:#ffffff;
-    border-radius:50%;
-    color: #000000 !important;
+    font-size:4rem;
+    color: #0C25B6 !important;
 }
 
+
+.mainBar .cardInfo{
+    line-height:19px;
+    color:#0C25B6;
+    padding-top:1.5rem
+}
+
+.mainBar .cardInfo .cardText{
+    font-size: 20px;
+    letter-spacing:2px;
+}
+
+.mainBar .cardInfo .cardNo{
+    font-size: 27px;
+    letter-spacing:1px;
+    color: #7F7D7D !important;
+}
 
 .loader {
     position: fixed;

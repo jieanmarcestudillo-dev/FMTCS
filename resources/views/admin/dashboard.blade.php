@@ -38,61 +38,46 @@
                 <!-- MAIN CONTENT -->
                     <div class="container-fluid mainBar mb-5">
                             <div class="row mb-3">
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="card shadow" style="height:8rem; border-radius:10px; background-color:#ffff;">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-3 text-center">
+                                                <div class="col-4 text-center">
                                                     <i class="bi bi-briefcase"></i>
                                                 </div>
-                                                <div class="col-9 text-center" style="line-height:19px; padding-top:1.5rem">
-                                                    <p class="card-text fw-bold cardHeader" style="font-size: 13px;">UPCOMING OPERATION</p>
-                                                    <p class="card-text fw-bold text-secondary" style="font-size: 2rem;" id="totalUpcomingOperation">0</p>
+                                                <div class="col-8 text-center cardInfo">
+                                                    <p class="card-text fw-bold cardText">TOTAL SALES</p>
+                                                    <p class="card-text fw-bold cardNo"id="totalUpcomingOperation">1234.00</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="card shadow" style="height:8rem; border-radius:10px; background-color:#ffff;">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-3 text-start">
-                                                   <i class="bi bi-calendar-check"></i>
-                                                </div>
-                                                <div class="col-9 text-start" style="line-height:19px; padding-top:1.5rem">
-                                                    <p class="card-text fw-bold cardHeader" style="font-size: 12px;">COMPLETED OPERATION</p>
-                                                    <p class="card-text fw-bold text-secondary text-center pe-4" style="font-size: 2rem;" id="totalCompletedOperation">0</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="card shadow" style="height:8rem; border-radius:10px; background-color:#ffff;">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-3 text-start">
+                                                <div class="col-4 text-center">
                                                     <i class="bi bi-person-workspace"></i>
                                                 </div>
-                                                <div class="col-9 text-center" style="line-height:19px; padding-top:1.5rem">
-                                                    <p class="card-text fw-bold cardHeader" style="font-size: 13px; letter-spacing:1px;">MANPOWER POOLING</p>
-                                                    <p class="card-text fw-bold text-secondary pe-2" style="font-size: 2rem;" id="totalForeman">0</p>
+                                                <div class="col-8 text-center cardInfo">
+                                                    <p class="card-text fw-bold cardText">PRODUCT SOLD</p>
+                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalForeman">153</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="card shadow" style="height:8rem; border-radius:10px; background-color:#ffff;">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-3 text-start">
+                                                <div class="col-4 text-center">
                                                     <i class="bi bi-people-fill"></i>
                                                 </div>
-                                                <div class="col-9 text-center" style="line-height:19px; padding-top:1.5rem">
-                                                    <p class="card-text fw-bold cardHeader" style="font-size: 13px; letter-spacing:1px;">PROJECT WORKERS</p>
-                                                    <p class="card-text fw-bold text-secondary pe-2" style="font-size: 2rem;" id="totalApplicants">0</p>
+                                                <div class="col-8 text-center cardInfo">
+                                                    <p class="card-text fw-bold cardText">PRODUCTS</p>
+                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalApplicants">56</p>
                                                 </div>
                                             </div>
                                         </div>

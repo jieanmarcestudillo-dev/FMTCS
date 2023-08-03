@@ -5,11 +5,7 @@
     </div>
     <div class="list-group list-group-flush">
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminDashboard"><i class="bi bi-bar-chart-line-fill pe-3"></i> Dashboard</a>
-        <a class="list-group-item list-group-item-action list-group-item-light haveSubMenu" href="#"><i class="bi bi-box pe-3"></i> Orders <i class="bi bi-plus plus"></i></a>
-        <ul class="list-group collapse">
-            <a class="list-group-item list-group-item-action list-group-item-light" href="/adminNewOrders"><i class="bi bi-plus-lg ps-4 pe-2"></i>New orders</a>
-            <a class="list-group-item list-group-item-action list-group-item-light" href="/adminOrderDetails"><i class="bi bi-check2 ps-4 pe-2"></i>Order Details</a>
-        </ul>
+        <a class="list-group-item list-group-item-action list-group-item-light" href="/adminNewOrders"><i class="bi bi-box pe-3"></i> New Orders</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminProductCategories"><i class="bi bi-calendar-check pe-3"></i> Categories</a>
         <a class="list-group-item list-group-item-action list-group-item-light haveSubMenu" href="#"><i class="bi bi-bag pe-3"></i> Products <i class="bi bi-plus plus"></i></a>
         <ul class="list-group collapse">
@@ -23,7 +19,7 @@
         <p class="text-center" id="dateDisplay"></p>
         <p class="text-center" id="clockDisplay"></p>
 
-        <a href="/userLogout" type="button" class="btn btn-sm" data-title="Logout?">
+        <a href="/userLogout" type="button" class="btn btn-sm" id="logout" data-title="Logout?">
             <i class="bi bi-box-arrow-left fs-4"></i>
         </a>
     </div>
