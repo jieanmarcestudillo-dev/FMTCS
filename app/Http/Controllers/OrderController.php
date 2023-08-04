@@ -77,6 +77,7 @@ class OrderController extends Controller
     //     }
     // }
 
+
     public function getNewOrders(Request $request){
         $data = Orders::join('users', 'orders.user_id', '=', 'users.id')
         ->where('status','=','Pending')->orderBy('orders.created_at', 'DESC')->get();

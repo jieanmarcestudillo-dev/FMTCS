@@ -43,11 +43,11 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-4 text-center">
-                                                    <i class="bi bi-briefcase"></i>
+                                                    <i class="bi bi-cash-coin"></i>
                                                 </div>
                                                 <div class="col-8 text-center cardInfo">
                                                     <p class="card-text fw-bold cardText">TOTAL SALES</p>
-                                                    <p class="card-text fw-bold cardNo"id="totalUpcomingOperation">1234.00</p>
+                                                    <p class="card-text fw-bold cardNo"id="totalSales">₱1234.00</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -58,11 +58,11 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-4 text-center">
-                                                    <i class="bi bi-person-workspace"></i>
+                                                    <i class="bi bi-receipt-cutoff"></i>
                                                 </div>
                                                 <div class="col-8 text-center cardInfo">
                                                     <p class="card-text fw-bold cardText">PRODUCT SOLD</p>
-                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalForeman">153</p>
+                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalProductsSold">153</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -73,16 +73,48 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-4 text-center">
-                                                    <i class="bi bi-people-fill"></i>
+                                                    <i class="bi bi-diagram-3-fill"></i>
                                                 </div>
                                                 <div class="col-8 text-center cardInfo">
                                                     <p class="card-text fw-bold cardText">PRODUCTS</p>
-                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalApplicants">56</p>
+                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalProducts"></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row ps-3 pe-2">
+                                <div class="card shadow ps-3 py-5">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                                <script>
+                                const ctx = document.getElementById('myChart');
+                                new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                    datasets: [{
+                                        label: 'Sold Items Per Month',
+                                        data: [12, 19, 3, 5, 2, 3,6,10,20, 8, 3, 20],
+                                        borderWidth: 1,
+                                        backgroundColor: [
+                                            '#0C25B6',
+                                        ],
+                                        borderColor: [
+                                            '#0c26b65e',
+                                        ],
+                                    }]
+                                    },
+                                    options: {
+                                    scales: {
+                                        y: {
+                                        beginAtZero: true
+                                        }
+                                    }
+                                    }
+                                });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -92,6 +124,8 @@
     </div>
 
     <!-- JS -->
+        <script src="{{ asset('/js/administrator/dashboard.js') }}"></script>
+        <script src="{{ asset('/js/logout.js') }}"></script>
         <script src="{{ asset('/js/sideBar.js') }}"></script>
         <script src="{{ asset('/js/dateTime.js') }}"></script>
     <!-- JS -->

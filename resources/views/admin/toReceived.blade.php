@@ -40,19 +40,19 @@
                     <div class="bg-body py-4 px-5 bg-body rounded shadow-lg">
                         <ul class="nav nav-tabs mb-4">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">&nbsp;&nbsp;Pending&nbsp;&nbsp;</a>
+                                <a class="nav-link" href="/adminNewOrders">Pending</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/adminToShip">To Ship</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/adminToReceived">To Received</a>
+                                <a class="nav-link active" href="#">&nbsp;&nbsp;To Received&nbsp;&nbsp;</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/adminCompletedOrders">Completed Orders</a>
                             </li>
                         </ul>
-                            <table id="newOrdersTable" class="table table-border text-center align-middle">
+                            <table id="toReceivedTable" class="table table-border text-center align-middle">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No.</th>

@@ -40,7 +40,7 @@
                     <div class="bg-body py-4 px-5 bg-body rounded shadow-lg">
                         <ul class="nav nav-tabs mb-4">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">&nbsp;&nbsp;Pending&nbsp;&nbsp;</a>
+                                <a class="nav-link" href="/adminNewOrders">Pending</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/adminToShip">To Ship</a>
@@ -49,10 +49,10 @@
                                 <a class="nav-link" href="/adminToReceived">To Received</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/adminCompletedOrders">Completed Orders</a>
+                                <a class="nav-link active" href="#">&nbsp;&nbsp;Completed Orders&nbsp;&nbsp;</a>
                             </li>
                         </ul>
-                            <table id="newOrdersTable" class="table table-border text-center align-middle">
+                            <table id="completedOrdersTable" class="table table-sm table-bordered text-center align-middle">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No.</th>
@@ -72,7 +72,6 @@
     </div>
 
     <!-- JS -->
-        <script src="{{ asset('/js/logout.js') }}"></script>
         <script src="{{ asset('/js/administrator/orders.js') }}"></script>
         <script src="{{ asset('/js/sideBar.js') }}"></script>
         <script src="{{ asset('/js/dateTime.js') }}"></script>

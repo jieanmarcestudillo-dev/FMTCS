@@ -21,7 +21,7 @@
                 <!-- NAV BAR -->
                     <nav class="navbar navbar-expand-lg border-bottom">
                         <div class="container-fluid">
-                            <h4 class="text-uppercase">OTHER PRODUCTS</h4>
+                            <h4 class="text-uppercase">PRODUCTS</h4>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                     <li>
@@ -36,13 +36,16 @@
                 <!-- NAV BAR -->
 
                 <!-- MAIN CONTENT -->
+                <div class="mainBar container">
 
+                </div>
                 <!-- MAIN CONTENT -->
             </div>
         <!-- MAIN CONTENT -->
     </div>
 
     <!-- JS -->
+        <script src="{{ asset('/js/logout.js') }}"></script>
         <script src="{{ asset('/js/sideBar.js') }}"></script>
         <script src="{{ asset('/js/dateTime.js') }}"></script>
     <!-- JS -->

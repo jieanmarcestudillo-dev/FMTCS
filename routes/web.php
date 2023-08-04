@@ -45,10 +45,11 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminNewOrders', [Controller::class,'adminNewOrders'])->name('adminNewOrders');
     Route::get('adminOrderDetails', [Controller::class,'adminOrderDetails'])->name('adminOrderDetails');
     Route::get('adminProductCategories', [Controller::class,'adminProductCategories'])->name('adminProductCategories');
-    Route::get('adminViewGear', [Controller::class,'adminViewGear'])->name('adminViewGear');
-    Route::get('adminViewBolts', [Controller::class,'adminViewBolts'])->name('adminViewBolts');
-    Route::get('adminViewOthers', [Controller::class,'adminViewOthers'])->name('adminViewOthers');
-    Route::get('adminSalesReport', [Controller::class,'adminSalesReport'])->name('adminSalesReport');
+    Route::get('adminViewProducts', [Controller::class,'adminViewProducts'])->name('adminViewProducts');
+    Route::get('adminManageCustomers', [Controller::class,'adminManageCustomers'])->name('adminManageCustomers');
+    Route::get('adminToShip', [Controller::class,'adminToShip'])->name('adminToShip');
+    Route::get('adminToReceived', [Controller::class,'adminToReceived'])->name('adminToReceived');
+    Route::get('adminCompletedOrders', [Controller::class,'adminCompletedOrders'])->name('adminCompletedOrders');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
 });
 

@@ -29,40 +29,50 @@ class Controller extends BaseController
 
 
     // ADMIN ROUTING
-        public function adminDashboard(){
-            return view('admin.dashboard');
-        }
-        public function adminNewOrders(){
-            return view('admin.newOrders');
-        }
-        public function adminOrderDetails(){
-            return view('admin.orderDetails');
-        }
-        public function adminProductCategories(){
-            return view('admin.categories');
-        }
-        public function adminViewGear(){
-            return view('admin.gears');
-        }
-        public function adminViewBolts(){
-            return view('admin.bolts');
-        }
-        public function adminViewOthers(){
-            return view('admin.others');
-        }
-        public function adminSalesReport(){
-            return view('admin.salesReport');
-        }
+
+        // SIDE NAV ROUTING
+            public function adminDashboard(){
+                return view('admin.dashboard');
+            }
+            public function adminNewOrders(){
+                return view('admin.newOrders');
+            }
+            public function adminOrderDetails(){
+                return view('admin.orderDetails');
+            }
+            public function adminProductCategories(){
+                return view('admin.categories');
+            }
+            public function adminViewProducts(){
+                return view('admin.products');
+            }
+            public function adminManageCustomers(){
+                return view('admin.manageCustomer');
+            }
+        // SIDE NAV ROUTING
+
+        // ORDERS ROUTING
+            public function adminToShip(){
+                return view('admin.toShip');
+            }
+            public function adminToReceived(){
+                return view('admin.toReceived');
+            }
+            public function adminCompletedOrders(){
+                return view('admin.completedOrders');
+            }
+        // ORDERS ROUTING
     // ADMIN ROUTING
+
 
 
     // USER LOGOUT
     public function userLogout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
-        return redirect('/login');
+        return response()->json(1);
     }
 }
+
+

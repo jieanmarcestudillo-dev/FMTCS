@@ -21,7 +21,7 @@
                 <!-- NAV BAR -->
                     <nav class="navbar navbar-expand-lg border-bottom">
                         <div class="container-fluid">
-                            <h4 class="text-uppercase">BOLT PRODUCTS</h4>
+                            <h4 class="text-uppercase">CUSTOMERS</h4>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                     <li>
@@ -36,13 +36,29 @@
                 <!-- NAV BAR -->
 
                 <!-- MAIN CONTENT -->
-
+                <div class="mainBar container">
+                    <div class="bg-body py-4 px-5 bg-body rounded shadow-lg">
+                        <table id="customerTable" class="table table-border text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Phone</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
                 <!-- MAIN CONTENT -->
             </div>
         <!-- MAIN CONTENT -->
     </div>
 
     <!-- JS -->
+        <script src="{{ asset('/js/logout.js') }}"></script>
+        <script src="{{ asset('/js/administrator/customer.js') }}"></script>
         <script src="{{ asset('/js/sideBar.js') }}"></script>
         <script src="{{ asset('/js/dateTime.js') }}"></script>
     <!-- JS -->
