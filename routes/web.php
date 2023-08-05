@@ -19,20 +19,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('welcome');
+
+Route::get('dashboard', function () {
+    return view('dashboard');
 });
 
 
 Route::get('viewProducts', [Controller::class,'viewProducts'])->name('viewProducts');
 Route::get('viewCart', [Controller::class,'viewCart'])->name('viewCart');
 Route::get('/products/getAll', [ProductController::class, 'getAllProducts']);
+Route::get('/products/getTopSales', [OrderDetailController::class, 'getTopSales']);
 Route::get('/products/getProduct', [ProductController::class, 'getProduct']);
 Route::get('/products/getByCategory', [ProductController::class, 'getProductByCategory']);
 Route::get('category/getAll', [CategoryController::class, 'getCategories']);
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/checkAuthenticated', [ProfileController::class, 'check_authenticated']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

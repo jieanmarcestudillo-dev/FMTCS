@@ -1,0 +1,17 @@
+table thead tr th {
+	border: 1px solid #D9D9D9;
+	border-left:none;
+	border-right:none;
+	padding: 10px;
+}
+
+table thead tr th:first-child,
+table thead tr th:last-child {
+
+}
+table thead tr th:first-child{
+   border-left: 1px solid #D9D9D9;
+}
+table thead tr th:last-child{
+    border-right: 1px solid #D9D9D9;
+}

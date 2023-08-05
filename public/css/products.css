@@ -1,0 +1,33 @@
+.text, #product_filter{
+    letter-spacing: 1px;
+    color: #0C25B6 !important;
+}
+
+.category {
+    list-style: none;
+    padding: 0;
+}
+
+.category li {
+    margin: 0;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.category li:hover {
+    background-color: #0C25B6 !important; /* Change background color on hover */
+    cursor: pointer
+}
+
+.category li:hover a{
+    color: white !important;
+}
+
+
+.category li a {
+    text-decoration: none; /* Remove underline from links */
+    color: gray; /* Default link color */
+    transition: color 0.3s;
+    display: block;
+}
+

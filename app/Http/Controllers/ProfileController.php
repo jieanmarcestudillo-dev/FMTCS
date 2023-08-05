@@ -14,6 +14,14 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function check_authenticated(){
+        if(Auth::user()){
+            return response()->json(['message'=>'success']);
+        }else{
+            return response()->json(['message'=>'failed']);
+        }
+    }
     public function edit(Request $request): View
     {
         return view('profile.edit', [

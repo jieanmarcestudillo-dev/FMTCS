@@ -7,6 +7,7 @@
     <link href="{{ asset('/css/welcome.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ URL('/image/frontend/FMTCS.jpg')}}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{asset('/css/input.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/products.css')}}">
     <title>FMTCS</title>
     @include('global')
 </head>
@@ -15,35 +16,33 @@
         @include('layouts.navbar')
     {{-- NAV BAR --}}
 
-    {{-- HERO SECTION --}}
-        <div class="container-fluid g-0 mt-lg-5" id="heroSection">
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="./image/frontend/banner-3.jpg" class="d-block w-100 img-fluid border-0">
-                        <div class="overlay-text text-center">
-                            <h1>Products</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {{-- HERO SECTION --}}
-
 
     {{-- Content section --}}
-    <div class="d-flex justify-content-center">
-        <div style="width:400px;" class="p-3">
-            <label>Select Category</label>
-            <select class="form-select" id="product_filter" onchange="loadFilteredProducts(this.value)">
-                
+    <div style="margin-top:100px;"></div>
+    <div class="d-flex justify-content-end">
+        <div class="p-3">
+            <select class="form-select " id="product_filter">
+                <option value="0" selected>Sort By</option>
+                <option value="0" selected>Lowest Price</option>
+                <option value="0" selected>Highest Price</option>
+                <option value="0" selected>Top Sales</option>
             </select>
         </div>
     </div>
-    <div class="container">
-      <div class="d-flex flex-wrap" id="products_content">
 
-      </div>
+    <div class="row m-5">
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+            <h5 class="text ">Product Categories</h5>
+            <hr>
+            <ul class="category" id="category_list">
+            </ul>
+        </div>
+        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 d-flex">
+            <div class="d-flex flex-wrap" id="products_content">
+
+            </div>
+            <div id="pagination-container"></div>
+        </div>
     </div>
 
     {{-- Content section --}}

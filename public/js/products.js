@@ -24,6 +24,7 @@ function loadProducts(){
 			let productCard = "";
 			let product = document.getElementById('products_content');
 			let id = 0;
+		
 			for(let x = 0; x < size; x++){
 				id = data[x].prod_id;
 				 productCard += `
@@ -67,16 +68,17 @@ function loadFilters(){
 	$.ajax({
 		url:'category/getAll',
 		success:function(data){
-			let categories = document.getElementById('product_filter');
+			let category = document.getElementById('category_list');
 
-			let result = "<option value='0'>All</option>";
+			let result = "";
 			let size = Object.keys(data).length;
 
 			for(let x = 0; x < size; x++){
-				result += `<option value="${data[x].cat_id}">${data[x].cat_name}</option>`;
+				result += `<li><a onclick="loadFilteredProducts(${data[x].cat_id})">${data[x].cat_name}</a></li>`;
 			}
-			categories.innerHTML = result;
+			category.innerHTML = result;
 		}
+
 	})
 }
 
@@ -112,61 +114,71 @@ function loadFilteredProducts(value){
 }
 
 function addToCart(){
-	let id = document.getElementById('details_id').value;
-	let qty = document.getElementById('product_count').value;
-	let price = document.getElementById('details_price').textContent;
-	let closeBtn = document.getElementById('details_close_btn');
 
-	if(qty == 0){
-		Swal.fire({
-			icon:'error',
-			title:'Failed',
-			text:'Quantity cannot be 0'
-		})
-	}else{
+	$.ajax({
+		url:'/checkAuthenticated',
+		success:function(result){
+			if(result.message != 'success'){
+				location.replace('login');
+			}else{
+				let id = document.getElementById('details_id').value;
+				let qty = document.getElementById('product_count').value;
+				let price = document.getElementById('details_price').textContent;
+				let closeBtn = document.getElementById('details_close_btn');
 
-		let object = {
-			item_id:id,
-			item_qty:qty,
-			item_price:price
-		}
+				if(qty == 0){
+					Swal.fire({
+						icon:'error',
+						title:'Failed',
+						text:'Quantity cannot be 0'
+					})
+				}else{
 
-		//check if the cart is already created
-		if(localStorage.getItem('cart')){
-			let found = true;
-			//check if the item id exists on the cart
-			let cart = JSON.parse(localStorage.getItem('cart'));
-			for(let x = 0; x < cart.length; x++){
-				//if found, then increment the qty
-				if(cart[x].item_id == id){
-					cart[x].item_qty = parseInt(qty) + parseInt(cart[x].item_qty);
-					localStorage.setItem('cart',JSON.stringify(cart));
-					found = false;
-					break;
+					let object = {
+						item_id:id,
+						item_qty:qty,
+						item_price:price
+					}
+
+					//check if the cart is already created
+					if(localStorage.getItem('cart')){
+						let found = true;
+						//check if the item id exists on the cart
+						let cart = JSON.parse(localStorage.getItem('cart'));
+						for(let x = 0; x < cart.length; x++){
+							//if found, then increment the qty
+							if(cart[x].item_id == id){
+								cart[x].item_qty = parseInt(qty) + parseInt(cart[x].item_qty);
+								localStorage.setItem('cart',JSON.stringify(cart));
+								found = false;
+								break;
+							}
+						}
+
+						//if the id has not match add the object to the array object
+						if(found){
+							cart.push(object);
+							localStorage.setItem('cart',JSON.stringify(cart));
+						}
+					}else{
+						//insert the object to the cart as you create a new one
+
+						let arr = [];
+						arr.push(object);
+
+						localStorage.setItem('cart',JSON.stringify(arr));
+					}
+
+					document.getElementById('product_count').value = 0;
+					closeBtn.click();
+					Swal.fire({
+						icon:'success',
+						title:'Success!',
+						text:'Product added successful'
+					})
 				}
+				console.log(localStorage.getItem('cart'));
 			}
-
-			//if the id has not match add the object to the array object
-			if(found){
-				cart.push(object);
-				localStorage.setItem('cart',JSON.stringify(cart));
-			}
-		}else{
-			//insert the object to the cart as you create a new one
-
-			let arr = [];
-			arr.push(object);
-
-			localStorage.setItem('cart',JSON.stringify(arr));
 		}
-
-		document.getElementById('product_count').value = 0;
-		closeBtn.click();
-		Swal.fire({
-			icon:'success',
-			title:'Success!',
-			text:'Product added successful'
-		})
-	}
-	
+	})
 }

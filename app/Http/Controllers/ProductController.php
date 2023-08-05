@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function getAllProducts(){
+        $page = 10;
         $result = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
             ->get();

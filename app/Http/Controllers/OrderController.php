@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -101,4 +102,5 @@ class OrderController extends Controller
         ->where('status','=','Completed')->orderBy('orders.created_at', 'DESC')->get();
         return response()->json($data);
     }
+
 }

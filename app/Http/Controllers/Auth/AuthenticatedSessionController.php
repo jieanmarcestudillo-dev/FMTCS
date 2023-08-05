@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-
+use Illuminate\Support\Facades\Log;
 class AuthenticatedSessionController extends Controller
 {
 
@@ -25,11 +25,14 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::check()) {
             if (Auth::user()->role === 'ADMIN') {
+                Log::info(1);
                 return redirect()->route('adminDashboard');
             } else {
-                return redirect()->route('dashboard');
+                Log::info(2);
+                return redirect()->route('welcome');
             }
         } else {
+            Log::info(3);
             return redirect()->route('login');
         }
     }

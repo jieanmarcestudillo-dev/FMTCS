@@ -85,6 +85,14 @@
                             <x-input-error :messages="$errors->get('email')" class="mt-2 alert alert-danger" role="alert" />
                         </div>
                         <div class="mb-3">
+                            <x-text-input id="home_address" class="block mt-1 w-full form-control rounded-0" type="text" name="home_address" :value="old('home_address')" required autofocus autocomplete="name" placeholder="Home Address"/>
+                            <x-input-error :messages="$errors->get('home_address')" class="mt-2 alert alert-danger" role="alert" />
+                        </div>
+                        <div class="mb-3">
+                            <x-text-input id="number" class="block mt-1 w-full form-control rounded-0" type="text" name="number" :value="old('number')" required autocomplete="username" placeholder="Contact Number"/>
+                            <x-input-error :messages="$errors->get('number')" class="mt-2 alert alert-danger" role="alert" />
+                        </div>
+                        <div class="mb-3">
                             <x-text-input id="password" class="block mt-1 w-full form-control rounded-0" type="password" id="password" name="password" required autocomplete="new-password" placeholder="Password"/>
                             <x-input-error :messages="$errors->get('password')" class="mt-2 alert alert-danger" role="alert" />
                         </div>
