@@ -18,7 +18,7 @@
                 <a class="nav-link" href="#servicesSection">Services</a>
             </li>
             <li class="nav-item mx-3">
-                <a class="nav-link" href="#categorySection">Products</a>
+                <a class="nav-link" href="/viewProducts">Products</a>
             </li>
             </ul>
             <form class="d-flex mb-lg-0 mb-1">
@@ -26,7 +26,7 @@
                 <button class="btn rounded-0 px-3 py-2" type="submit"><i class="bi bi-search"></i></button>
             </form>
                 <a href="/login" class="btn ms-lg-2 me-lg-0 me-5 rounded-0 user" data-title="Login?" type="button"><i class="bi bi-person"></i></a>
-                <button class="btn rounded-0 cart" data-title="View Cart?" type="button"><i class="bi bi-cart"></i></button>
+                <a class="btn rounded-0 cart" href="/viewCart"><i class="bi bi-cart"></i></a>
         </div>
         </div>
     </nav>

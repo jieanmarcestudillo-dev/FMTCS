@@ -22,10 +22,12 @@ Route::get('/', function () {
 });
 
 
-Route::get('viewGearCategory', [Controller::class,'viewGearCategory'])->name('viewGearCategory');
-Route::get('viewBoltsCategory', [Controller::class,'viewBoltsCategory'])->name('viewBoltsCategory');
-Route::get('viewOtherCategory', [Controller::class,'viewOtherCategory'])->name('viewOtherCategory');
-
+Route::get('viewProducts', [Controller::class,'viewProducts'])->name('viewProducts');
+Route::get('viewCart', [Controller::class,'viewCart'])->name('viewCart');
+Route::get('/products/getAll', [ProductController::class, 'getAllProducts']);
+Route::get('/products/getProduct', [ProductController::class, 'getProduct']);
+Route::get('/products/getByCategory', [ProductController::class, 'getProductByCategory']);
+Route::get('category/getAll', [CategoryController::class, 'getCategories']);
 
 
 Route::get('/dashboard', function () {
@@ -52,38 +54,6 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminCompletedOrders', [Controller::class,'adminCompletedOrders'])->name('adminCompletedOrders');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
 });
-
-    # -------------------------Supplier Routes--------------------
-    Route::get('getAllSuppliers', [SupplierController::class,'getAllSuppliers']);
-    Route::get('getSupplier', [SupplierController::class, 'getSupplier']);
-    Route::get('updateSupplier', [SupplierController::class,'updateSupplier']);
-    Route::get('deleteSupplier', [SupplierController::class,'deleteSupplier']);
-    Route::get('addSupplier', [SupplierController::class,'addSupplier']);
-
-    # -------------------------Category Routes--------------------
-    Route::get('getAllCategory', [CategoryController::class,'getAllCategory']);
-    Route::get('getCategory', [CategoryController::class, 'getCategory']);
-    Route::get('updateCategory', [CategoryController::class,'updateCategory']);
-    Route::get('deleteCategory', [CategoryController::class,'deleteCategory']);
-    Route::get('addCategory', [CategoryController::class,'addCategory']);
-
-    # -------------------------Log Routes--------------------
-    Route::get('getAllLogs', [LogController::class,'getAllLogs']);
-    Route::get('getLogs', [LogController::class,'getLogs']);
-
-    # -------------------------Product Routes--------------------
-    Route::get('getProduct', [ProductController::class, 'getProduct']);
-    Route::get('updateProduct', [ProductController::class,'updateProduct']);
-    Route::get('deleteProduct', [ProductController::class,'deleteProduct']);
-    Route::get('addProduct', [ProductController::class,'addProduct']);
-
-    # -------------------------Order Routes--------------------
-    Route::get('getAllProducts', [ProductController::class,'getAllProducts']);
-    Route::get('getAllOrders', [OrderController::class,'getAllOrders']);
-    Route::get('getOrder', [ProductController::class, 'getOrder']);
-    Route::get('updateOrder', [ProductController::class,'updateOrder']);
-    Route::get('addOrder', [ProductController::class,'addOrder']);
-
 
 # ENDS HERE ADMIN ROUTES
 

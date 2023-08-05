@@ -1,0 +1,11 @@
+ /* Target the inner spin button (up arrow) */
+ input[type="number"]::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+ }
+
+ /* Target the outer spin button (down arrow) */
+ input[type="number"]::-webkit-outer-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+ }

@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('category', function (Blueprint $table) {
-            // $table->enum('cat_class', ['GEARS','BOLTS','OTHERS']);
             $table->id('cat_id');
             $table->string('cat_photos');
             $table->string('cat_name');

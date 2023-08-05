@@ -3,29 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\App;
 use App\Models\Products;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function getAllProducts(){
-        $result = Products::all();
-
-        if(!$result->isEmpty()){
-            for($x = 0; $x < $result->count(); $x++){
-                $data = '
-                    <div class="d-">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCategory">
-                            <i class="bi bi-pencil-square" onclick="editProduct('.$result[$x]->prod_id.')></i>
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteProduct('.$result[$x]->prod_id.')">
-                            <i class="bi bi-trash3-fill"></i>
-                        </button>
-                    </div>
-                ';
-                $result[$x]->action = $data;
-            }
-        }
-
+        $result = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->get();
         return response()->json($result);
     }
 
@@ -92,8 +78,31 @@ class ProductController extends Controller
     }
 
     public function getProduct(Request $request){
-        $product = Products::find($request->input('product_id'));
+        $product = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->where('prod_id',$request->input('product_id'))
+            ->get();
+            
+        if($product){
+            return response()->json($product);
+        }
+    }
 
+    public function getProductByCategory(Request $request){
+
+        if($request->input('category_id') == 0){
+            $product = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->get();
+        }else{
+            $product = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->where('category.cat_id',$request->input('category_id'))
+            ->get();
+        }
+
+        
+            
         if($product){
             return response()->json($product);
         }

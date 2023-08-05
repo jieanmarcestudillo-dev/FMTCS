@@ -10,26 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class CategoryController extends Controller
 {
     public function getAllCategories(){
-        // MARVIN BACK EMD
-            // $result = Category::all();
-            // if(!$result->isEmpty()){
-            //     for($x = 0; $x < $result->count(); $x++){
-            //         $data = '
-            //             <div class="d-">
-            //                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCategory">
-            //                     <i class="bi bi-pencil-square" onclick="editCategory('.$result[$x]->cat_id.')></i>
-            //                 </button>
-            //                 <button class="btn btn-danger" onclick="deleteCategory('.$result[$x]->cat_id.')">
-            //                     <i class="bi bi-trash3-fill"></i>
-            //                 </button>
-            //             </div>
-            //         ';
-            //         $result[$x]->action = $data;
-            //     }
-            // }
-            // return response()->json($result);
-        // MARVIN BACK EMD
-
         // NEW BACK END
             $categories = Category::all();
             if(Category::all()->isNotEmpty()){
@@ -66,18 +46,6 @@ class CategoryController extends Controller
     }
 
     public function addCategory(Request $request){
-        // MARVIN BACKEND
-            // $category = new Category;
-            // $category->cat_name = $request->input('name');
-            // $category->cat_class = $request->input('class');
-            // $log = ' added ' . $request->input('name') . ' to the list of category';
-            // App::make(LogController::class)->addLogs($log);
-            // if($category->save()){
-            //     return response()->json(['result' => 'success']);
-            // }else{
-            //     return response()->json(['result' => 'failed']);
-            // }
-        // MARVIN BACKEND
 
         // NEW BACK END
             $filename = $request->file('categoryPhotos');
@@ -99,46 +67,30 @@ class CategoryController extends Controller
         App::make(LogController::class)->addLogs($log);
 
         if($category->save()){
+            Log::info('success');
             return response()->json(['result' => 'success']);
         }else{
+            Log::info("failed");
             return response()->json(['result' => 'failed']);
         }
     }
 
     public function deleteCategory(Request $request){
-        // MARVIN BACKEND
-            //  $category = Category::find($request->input('category_id'));
-
-            //  $log = ' has deleted a category with an ID of ' . $request->input('category_id');
-
-            // App::make(LogController::class)->addLogs($log);
-
-            // if($category->delete()){
-            //     return response()->json(['result' => 'success']);
-            // }else{
-            //     return response()->json(['result' => 'failed']);
-            // }
-        // MARVIN BACKEND
-
+        
         // NEW BACK END
             return response()->json(Category::where([['cat_id', '=', $request->catId]])->delete() ? 1 : 0);
         // NEW BACK END
     }
 
     public function showCategory(Request $request){
-        // MARVIN BACKEND
-            // $category = Category::find($request->input('category_id'));
-            // if($category){
-            //     return response()->json([
-            //         'name' => $category->cat_name,
-            //         'class' => $category->cat_class,
-            //         'id' => $category->cat_id
-            //     ]);
-            // }
-        // MARVIN BACKEND
-
+        
         // NEW BACK END
             return response()->json(Category::where([['cat_id', '=', $request->catId]])->get());
         // NEW BACK END
+    }
+
+    public function getCategories(){
+        $result = Category::all();
+        return response()->json($result);
     }
 }

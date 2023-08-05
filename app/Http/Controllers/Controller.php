@@ -13,15 +13,10 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
 
     // HOME ROUTING
-        public function viewGearCategory(){
-            return view('viewGearCategory');
+        public function viewProducts(){
+            return view('viewProducts');
         }
-        public function viewBoltsCategory(){
-            return view('viewBoltsCategory');
-        }
-        public function viewOtherCategory(){
-            return view('viewOtherCategory');
-        }
+
         public function viewCart(){
             return view('viewCart');
         }
