@@ -21,11 +21,10 @@
     <div style="margin-top:100px;"></div>
     <div class="d-flex justify-content-end">
         <div class="p-3">
-            <select class="form-select " id="product_filter">
-                <option value="0" selected>Sort By</option>
-                <option value="0" selected>Lowest Price</option>
-                <option value="0" selected>Highest Price</option>
-                <option value="0" selected>Top Sales</option>
+            <select class="form-select " id="product_filter" onchange="sort_products(this.value)">
+                <option value="0" selected hidden>Sort By</option>
+                <option value="1">Lowest Price</option>
+                <option value="2">Highest Price</option>
             </select>
         </div>
     </div>

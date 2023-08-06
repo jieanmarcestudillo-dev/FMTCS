@@ -37,31 +37,8 @@
                             <th>Subtotal</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <div class="col-4">
-                                    <img src="/image/products/default.png" height="50px;">
-                                </div>
-                                <div class="col-8">
-                                    <p>Anchor Bolt</p>
-                                <small class="text-muted" style="position:relative; top: -17px;">Bolt Frabrication</small>
-                                </div>
-                                </div>
-                            </td>
-                            <td>
-                                Php <span>250.00</span>
-                            </td>
-                            <td>
-                                <div class="input-group d-flex flex-wrap">
-                                    <button class="btn btn-light" type="button" onclick="minusCount()" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%; border: 1px solid #7f7d7d; border-right:none">-</button>
-                                    <input type="number" class="bg-light" value="0" disabled id="product_count" style="border: 1px solid #7f7d7d; width:45px; text-align: right;padding-left:10px;">
-                                    <button class="btn btn-light" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%; border: 1px solid #7f7d7d; border-left:none" type="button" onclick="addCount()">+</button>
-                                </div>
-                            </td>
-                            <td>Php <span>250.00</span></td>
-                        </tr>
+                    <tbody id="cartList">
+                        
 
                     </tbody>
                     <tfoot >
@@ -75,13 +52,13 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="col-xl-4 col-lg-4 col-lg-4 col-md-4 col-sm-12 border" style="border-color:#D9D9D9">
+            <div class="col-xl-4 col-lg-4 col-lg-4 col-md-4 col-sm-12 border" style="border-color:#D9D9D9" id="cartCheckout">
                 <div class="p-2">
                     <p class="text-center"><b>Cart Total</b></p>
                     <hr style="position:relative; top:-10px;">
                     <div class="row">
                         <p class="col-6" style="padding-left:30px;">Subtotal</p>
-                        <p class="col-6 d-flex justify-content-end" style="padding-right:30px;"><span>Php <span>1,000</span></span></p>
+                        <p class="col-6 d-flex justify-content-end" style="padding-right:30px;"><span id="total_price"></span></p>
                     </div>
                     <hr style="position:relative; top:-10px;">
                     <div class="row">
@@ -89,7 +66,7 @@
                         <p class="col-6 d-flex justify-content-end" style="text-align: justify; padding-right:30px;">
                             <span>
                                 <span >
-                                    Purok 5 Old Cabalan Olongapo City, Zambales
+                                    {{Auth::user()->address}}
                                 </span>
                             </span>
                         </p>
@@ -122,15 +99,15 @@
                                         <div class="row">
                         <p class="col-6" style="padding-left:30px;"><b>Select Payment Type</b></p>
                         <p class="col-6 d-flex justify-content-end" style="text-align: justify; padding-right:30px;">
-                            <select class="form-select">
-                                <option value="0">Select</option>
+                            <select class="form-select" id="payment_type">
+                                <option value="0" selected hidden>Select</option>
                                 <option value="1">COD</option>
                                 <option value="2">ONLINE</option>
                             </select>
                         </p>
                     </div>
                     <hr style="position:relative; top:-10px;">
-                    <button class="btn rounded-0 text-white form-control" style="background-color:#0C25B6">Proceed to Payment</button>
+                    <button class="btn rounded-0 text-white form-control" onclick="check_out()" style="background-color:#0C25B6">Proceed to Payment</button>
                 </div>
             </div>
         </div>
@@ -142,6 +119,6 @@
 
     @include('modals.view_product_details')
 
-    <script type="text/javascript" src="/js/products.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
 </body>
 </html>

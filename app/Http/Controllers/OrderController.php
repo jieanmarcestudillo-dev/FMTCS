@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\OrderDetail;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -101,6 +104,42 @@ class OrderController extends Controller
         $data = Orders::join('users', 'orders.user_id', '=', 'users.id')
         ->where('status','=','Completed')->orderBy('orders.created_at', 'DESC')->get();
         return response()->json($data);
+    }
+
+    public function processOrder(Request $request){
+
+        $total = $request->input('total');
+        $cart = json_decode($request->input('order'));
+
+        $size = sizeof($cart);
+
+        $orders = new Orders();
+
+        $orders->user_id = Auth::user()->id;
+        $orders->track_num = 'ORD' . Auth::user()->id . time();
+        $orders->status = 'PENDING';
+        $orders->total = $total;
+
+        if($orders->save()){
+            $id = $orders->id;
+
+            for($x = 0; $x < $size; $x++){
+                $order_detail = new OrderDetail();
+                $order_detail->detail_id = $id;
+                $order_detail->prod_id = $cart[$x]->item_id;
+                $order_detail->qty = $cart[$x]->item_qty;
+                $order_detail->price = $cart[$x]->item_price;
+                $order_detail->total = $cart[$x]->item_price * $cart[$x]->item_qty;
+                $order_detail->save();
+            }
+            return response()->json([
+                'message' => 'success'
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'failed'
+            ]);
+        }
     }
 
 }

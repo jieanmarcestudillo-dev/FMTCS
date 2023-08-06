@@ -16,6 +16,24 @@ class ProductController extends Controller
         return response()->json($result);
     }
 
+    public function getSortedProducts(Request $request){
+        $id = $request->input('id');
+
+        if($id == 1){
+            $result = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->orderBy('prod_price')
+            ->get();
+        }else if($id == 2){
+            $result = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->orderBy('prod_price', 'DESC')
+            ->get();
+        }
+
+        return response()->json($result);
+    }
+
     public function addProduct(Request $request){
         $product = new Products;
 
@@ -113,5 +131,16 @@ class ProductController extends Controller
         return response()->json(Category::all());
     }
 
+    public function getProductsById(Request $request){
 
+        $id = $request->input('id');
+
+        $result = Products::select('products.*','category.cat_name')
+                    ->join('category','products.category','=','category.cat_id')
+                    ->where('products.prod_id',$id)
+                    ->get();
+
+        return response()->json($result);
+
+    }
 }

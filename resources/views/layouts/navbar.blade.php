@@ -35,21 +35,22 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                            <li>
+                            <li><a class="dropdown-item">
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button class="dropdown-item" type="submit" onclick="event.preventDefault(); this.closest('form').submit();">Log Out</button>
-                                </form>
+                                    <button  style="background-color:transparent; color:#0C25B6; border:none;" type="submit" onclick="event.preventDefault(); this.closest('form').submit();">Log Out</button>
+                                </form></a>
                             </li>
                         </ul>
                     </div>
 
+                    <a class="btn rounded-0 cart" href="/viewCart"><i class="bi bi-cart"></i></a>
                 @else
                     <a href="/login" class="btn ms-lg-2 me-lg-0 me-5 rounded-0 user" data-title="Login?" type="button"><i class="bi bi-person"></i></a>
                 @endif
 
-                    <a class="btn rounded-0 cart" href="/viewCart"><i class="bi bi-cart"></i></a>
+                    
             </div>
         </div>
     </nav>

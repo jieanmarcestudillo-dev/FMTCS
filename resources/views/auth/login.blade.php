@@ -32,6 +32,9 @@
                         <x-text-input class="form-control" placeholder="Email" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username"/>
                         <label for="floatingInput" class="text-muted">Email</label>
                     </div>
+                    @if(session('user_email_is_verified') === 'not_verified')
+                        <div class="mt-2 alert alert-danger d-flex justify-content-start"> • Your email is not verified</div>
+                    @endif
                     <x-input-error :messages="$errors->get('email')" class="mt-2 alert alert-danger" role="alert"/>
                     <div class="form-floating mb-3">
                         <x-text-input type="password" class="form-control" placeholder="Password" required id="password" name="password" required autocomplete="current-password" />

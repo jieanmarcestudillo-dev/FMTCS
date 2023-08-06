@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 class AuthenticatedSessionController extends Controller
 {
 
@@ -24,12 +25,23 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (Auth::check()) {
-            if (Auth::user()->role === 'ADMIN') {
-                Log::info(1);
-                return redirect()->route('adminDashboard');
-            } else {
-                Log::info(2);
-                return redirect()->route('welcome');
+            if(Auth::user()->email_verified_at !== NULL){
+                if (Auth::user()->role === 'ADMIN') {
+                    Log::info(1);
+                    return redirect()->route('adminDashboard');
+                } else {
+                    Log::info(2);
+                    return redirect()->route('welcome');
+                }
+            }else{
+                Auth::guard('web')->logout();
+
+                $request->session()->invalidate();
+
+                $request->session()->regenerateToken();
+
+                Session::put('user_email_is_verified','not_verified');
+                return redirect()->route('login');
             }
         } else {
             Log::info(3);
