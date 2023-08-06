@@ -48,6 +48,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminNewOrders', [Controller::class,'adminNewOrders'])->name('adminNewOrders');
     Route::get('adminOrderDetails', [Controller::class,'adminOrderDetails'])->name('adminOrderDetails');
     Route::get('adminProductCategories', [Controller::class,'adminProductCategories'])->name('adminProductCategories');
+    Route::get('adminSupplier', [Controller::class,'adminSupplier'])->name('adminSupplier');
     Route::get('adminViewProducts', [Controller::class,'adminViewProducts'])->name('adminViewProducts');
     Route::get('adminManageCustomers', [Controller::class,'adminManageCustomers'])->name('adminManageCustomers');
     Route::get('adminToShip', [Controller::class,'adminToShip'])->name('adminToShip');

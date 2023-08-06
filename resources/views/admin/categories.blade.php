@@ -39,7 +39,7 @@
                     <div class="mainBar container-fluid ms-4">
                         <div class="row">
                             <div class="col-11 ms-3 text-end">
-                                <button type="button" class="btn text-white rounded px-4 py-2" data-bs-toggle="modal" data-bs-target="#addCategory" style="background-color:#0C25B6">Add Category</button>
+                                <button type="button" class="btn rounded-0 text-white rounded px-4 py-2" data-bs-toggle="modal" data-bs-target="#addCategory" style="background-color:#0C25B6">Add Category</button>
                             </div>
                         </div>
                         <div class="row g-0" id="getAllCategories"></div>
@@ -65,8 +65,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn text-white rounded px-4" style="background-color:#0C25B6">Submit</button>
+                                    <button type="button" class="btn rounded-0 btn-secondary rounded px-4" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn rounded-0 text-white rounded px-4" style="background-color:#0C25B6">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -98,8 +98,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary rounded px-4" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn text-white rounded px-4" style="background-color:#0C25B6">Save Changes</button>
+                                    <button type="button" class="btn rounded-0 btn-secondary rounded px-4" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn rounded-0 text-white rounded px-4" style="background-color:#0C25B6">Save Changes</button>
                                     </div>
                                 </form>
                             </div>

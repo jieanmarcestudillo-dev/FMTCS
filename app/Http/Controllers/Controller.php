@@ -44,6 +44,9 @@ class Controller extends BaseController
             public function adminManageCustomers(){
                 return view('admin.manageCustomer');
             }
+            public function adminSupplier(){
+                return view('admin.supplier');
+            }
         // SIDE NAV ROUTING
 
         // ORDERS ROUTING

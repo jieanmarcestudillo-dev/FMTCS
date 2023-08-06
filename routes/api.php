@@ -6,6 +6,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -38,5 +40,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::get('totalProductsSold', [DashboardController::class,'totalProductsSold']);
         Route::get('totalProducts', [DashboardController::class,'totalProducts']);
     // DASHBOARD PAGE
+
+    // PRODUCT PAGE
+        Route::get('getAllCategory', [ProductController::class,'getAllCategory']);
+    // PRODUCT PAGE
+
+    // SUPPLIER PAGE
+        Route::get('getAllSuppliers', [SupplierController::class,'getAllSuppliers']);
+        Route::post('addSupplier', [SupplierController::class,'addSupplier']);
+        Route::post('deleteSupplier', [SupplierController::class,'deleteSupplier']);
+        Route::get('getSupplier', [SupplierController::class,'getSupplier']);
+    // SUPPLIER PAGE
 // ADMIN API
 

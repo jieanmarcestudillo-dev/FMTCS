@@ -7,6 +7,7 @@
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminDashboard"><i class="bi bi-bar-chart-line-fill pe-3"></i> Dashboard</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminNewOrders"><i class="bi bi-box pe-3"></i> New Orders</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminProductCategories"><i class="bi bi-calendar-check pe-3"></i> Categories</a>
+        <a class="list-group-item list-group-item-action list-group-item-light" href="/adminSupplier"><i class="bi bi-buildings pe-3"></i> Supplier</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminViewProducts"><i class="bi bi-bag pe-3"></i> Products</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminManageCustomers"><i class="bi bi-person-square pe-3"></i> Manage Customers</a>
     </div>

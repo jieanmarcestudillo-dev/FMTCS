@@ -83,7 +83,7 @@ class ProductController extends Controller
             ->join('category','products.category', '=','category.cat_id')
             ->where('prod_id',$request->input('product_id'))
             ->get();
-            
+
         if($product){
             return response()->json($product);
         }
@@ -102,10 +102,16 @@ class ProductController extends Controller
             ->get();
         }
 
-        
-            
+
+
         if($product){
             return response()->json($product);
         }
     }
+
+    public function getAllCategory(Request $request){
+        return response()->json(Category::all());
+    }
+
+
 }

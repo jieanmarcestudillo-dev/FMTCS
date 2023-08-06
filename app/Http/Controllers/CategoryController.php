@@ -16,16 +16,16 @@ class CategoryController extends Controller
                 foreach(Category::all() as $item){
                     echo "
                         <div class='col-4 my-2'>
-                            <div class='card shadow px-4 pt-3' style='width: 19rem; border-radius:20px;'>
+                            <div class='card shadow px-4 pt-3' style='width: 19rem;'>
                                 <img src='$item->cat_photos' class='card-img-top' style='height: 13rem;'>
                                 <div class='card-body'>
                                     <p class='card-text text-center mt-0 fs-4 fw-bolder text-uppercase'>$item->cat_name</p>
                                     <div class='row g-0 text-center'>
                                         <div class='col-6'>
-                                            <button onclick='showCategory($item->cat_id)' type='button' style='background-color:#0C25B6' class='btn text-white rounded'>Update</button>
+                                            <button onclick='showCategory($item->cat_id)' type='button' style='background-color:#0C25B6' class='btn rounded-0 text-white rounded'>Update</button>
                                         </div>
                                         <div class='col-6'>
-                                            <button onclick='deleteCategory($item->cat_id)' type='button' style='background-color:#0C25B6' class='btn text-white rounded'>Remove</button>
+                                            <button onclick='deleteCategory($item->cat_id)' type='button' style='background-color:#0C25B6' class='btn rounded-0 text-white rounded'>Remove</button>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,6 @@ class CategoryController extends Controller
     }
 
     public function addCategory(Request $request){
-
         // NEW BACK END
             $filename = $request->file('categoryPhotos');
             $imageName = time().rand() . '.' .  $filename->getClientOriginalExtension();
@@ -76,14 +75,12 @@ class CategoryController extends Controller
     }
 
     public function deleteCategory(Request $request){
-        
         // NEW BACK END
             return response()->json(Category::where([['cat_id', '=', $request->catId]])->delete() ? 1 : 0);
         // NEW BACK END
     }
 
     public function showCategory(Request $request){
-        
         // NEW BACK END
             return response()->json(Category::where([['cat_id', '=', $request->catId]])->get());
         // NEW BACK END
