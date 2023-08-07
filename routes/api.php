@@ -43,6 +43,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     // PRODUCT PAGE
         Route::get('getAllCategory', [ProductController::class,'getAllCategory']);
+        Route::get('getAllProducts', [ProductController::class,'getAllProducts']);
+        Route::get('searchProducts', [ProductController::class,'searchProducts']);
+        Route::get('sortByCategory', [ProductController::class,'sortByCategory']);
+        Route::post('addProduct', [ProductController::class,'addProduct']);
     // PRODUCT PAGE
 
     // SUPPLIER PAGE

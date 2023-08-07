@@ -19,9 +19,9 @@ class Products extends Model
         'prod_qty',
         'prod_cost',
         'prod_price',
-        'categry',
+        'category',
         'supplier',
         'prod_serial',
-        'prod_pic1'
+        'prod_pic'
     ];
 }

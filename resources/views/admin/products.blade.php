@@ -36,13 +36,22 @@
                 <!-- NAV BAR -->
 
                 <!-- MAIN CONTENT -->
-                    <div class="mainBar container-fluid ms-4">
-                        <div class="row">
-                            <div class="col-11 ms-3 text-end">
-                                <button type="button" class="btn rounded-0 text-white rounded px-4 py-2" data-bs-toggle="modal" data-bs-target="#addProduct" style="background-color:#0C25B6">Add Product</button>
+                    <div class="mainBar container-fluid">
+                        <div class="row mb-2 me-3">
+                            <div class="col-2 text-end">
+                                <select class="form-select form-select-lg rounded-0 py-2" aria-label="Default select example" id="itemCategoryFilter" onchange="itemCategoryFilter(this.value)"></select>
+                            </div>
+                            <div class="col-4 me-auto text-end">
+                                <form class="d-flex">
+                                    <input class="form-control rounded-0 border-2" type="search" placeholder="Search By Product Serial Number" aria-label="Search" id="searchProduct">
+                                    <button class="btn rounded-0 text-white" style='background-color:#0C25B6;' type="submit">Search</button>
+                                </form>
+                            </div>
+                            <div class="col-3 text-end">
+                                <button type="button" class="btn rounded-0 text-white rounded px-4 py-2" data-bs-toggle="modal" data-bs-target="#addProduct" style="background-color:#0C25B6">Add New Product</button>
                             </div>
                         </div>
-                        <div class="row g-0" id="getAllProducts"></div>
+                        <div cla+s="row g-0" id="getAllProducts"></div>
                     </div>
                 <!-- MAIN CONTENT -->
             </div>
@@ -79,23 +88,27 @@
                             <label class="form-label ps-1">Item Image:</label>
                             <input type="file" name="itemImage" class="form-control bg-body">
                         </div>
-                        <div class="col-6 mb-3">
+                        <div class="col-4 mb-3">
                             <label class="form-label ps-1">Item Name:</label>
                             <input type="text" name="itemName" class="form-control bg-body">
                         </div>
-                        <div class="col-6 mb-3">
+                        <div class="col-4 mb-3">
                             <label class="form-label ps-1">Category:</label>
                             <select class="form-select" id="itemCategory" name="itemCategory"></select>
                         </div>
-                        <div class="col-6 mb-3">
+                        <div class="col-4 mb-3">
                             <label class="form-label ps-1">Supplier:</label>
                             <select class="form-select" id="itemSupplier" name="itemSupplier"></select>
                         </div>
-                        <div class="col-3 mb-3">
+                        <div class="col-4 mb-3">
+                            <label class="form-label ps-1">Quantity:</label>
+                            <input type="number" name="itemQty" class="form-control bg-body">
+                        </div>
+                        <div class="col-4 mb-3">
                             <label class="form-label ps-1">Cost:</label>
                             <input type="text" name="itemCost" class="form-control bg-body">
                         </div>
-                        <div class="col-3 mb-3">
+                        <div class="col-4 mb-3">
                             <label class="form-label ps-1">Price:</label>
                             <input type="text" class="form-control bg-body" name="itemPrice">
                         </div>

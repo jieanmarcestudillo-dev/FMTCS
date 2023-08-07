@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('prod_price');
             $table->integer('category');
             $table->integer('supplier');
-            $table->integer('prod_serial');
+            $table->string('prod_serial');
             $table->string('prod_pic');
             $table->timestamps();
         });
