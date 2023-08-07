@@ -31,6 +31,12 @@ $(document).ready(function(){
                 { "data": "address" },
                 { "data": "phone" },
                 { "data": "email" },
+                {"data": "created_at",
+                "render": function(data) {
+                return moment(data).format('MMM DD, YYYY | hh:mm A');
+                },
+                "targets": 1
+                },
             ],
             get "columns"() {
                 return this["_columns"];

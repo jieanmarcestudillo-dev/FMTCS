@@ -58,8 +58,8 @@
                                         <th class="text-center">No.</th>
                                         <th class="text-center">Order ID</th>
                                         <th class="text-center">Customer</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">Date</th>
+                                        <th class="text-center">Phone</th>
+                                        <th class="text-center">Order Date</th>
                                         <th class="text-center col-2">Action</th>
                                     </tr>
                                 </thead>

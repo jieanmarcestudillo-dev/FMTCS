@@ -148,3 +148,45 @@ $(document).ready(function(){
         })
     }
 // SHOW SUPPLIER
+
+// UPDATE SUPPLIER
+    $(document).ready(function () {
+        $('#updateSupplier').on( 'submit' , function(e){
+            e.preventDefault();
+            var currentForm = $('#updateSupplier')[0];
+            var data = new FormData(currentForm);
+            $.ajax({
+                url: "api/updateSupplier",
+                type:"POST",
+                method:"POST",
+                dataType: "text",
+                data:data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(response){
+                    if(response == 1){
+                        $('#supplierTable').DataTable().ajax.reload();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'SUPPLIER HAS BEEN UPDATED',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }else if(response == 0){
+                        // SOMETHING WRONG IN BACKEND
+                        Swal.fire(
+                        'Added Failed',
+                        'Sorry supplier has not update',
+                        'error'
+                        )
+                    }
+                },
+                error:function(error){
+                    console.log(error)
+                }
+            });
+        });
+    });
+// UPDATE SUPPLIER

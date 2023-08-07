@@ -128,7 +128,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         </div>
-                        <form id="addSupplierForm">
+                        <form id="updateSupplier">
                         <div class="row my-3 px-1 g-2">
                             <div class="col-12 mb-3">
                                 <label class="form-label">Name:</label>

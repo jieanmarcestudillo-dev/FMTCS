@@ -30,14 +30,19 @@ $(document).ready(function(){
             },
             "_columns": [
                 { "data": "order_id" },
+                { "data": "track_num" },
                 { "data": "name" },
-                { "data": "email" },
-                { "data": "lastname" },
-                { "data": "created_at" },
+                { "data": "phone" },
+                {"data": "created_at",
+                "render": function(data) {
+                return moment(data).format('MMM DD, YYYY | hh:mm A');
+                },
+                "targets": 1
+                },
                 {
-                    "data": "order_id ",
+                    "data": "order_id",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-pencil-square"></i></button> <button type="button" data-title="Deactivate This?" onclick=deactivateEmployees(' + data + ') class="btn rounded-0 btn-outline-danger btn-sm py-2 px-3"><i class="bi bi-archive-fill"></i></button> <a href="viewDetails/' + data + '" class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3" data-title="View Details?"><i class="bi bi-filetype-pdf"></i></a>';
+                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3"><i class="bi bi-box"></i></button> <a href="orderDetails/' + data + '" data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a>';
                     }
                 }
             ],
@@ -78,14 +83,19 @@ $(document).ready(function(){
             },
             "_columns": [
                 { "data": "order_id" },
+                { "data": "track_num" },
                 { "data": "name" },
-                { "data": "email" },
-                { "data": "lastname" },
-                { "data": "created_at" },
+                { "data": "phone" },
+                {"data": "created_at",
+                "render": function(data) {
+                return moment(data).format('MMM DD, YYYY | hh:mm A');
+                },
+                "targets": 1
+                },
                 {
-                    "data": "order_id ",
+                    "data": "order_id",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-pencil-square"></i></button> <button type="button" data-title="Deactivate This?" onclick=deactivateEmployees(' + data + ') class="btn rounded-0 btn-outline-danger btn-sm py-2 px-3"><i class="bi bi-archive-fill"></i></button> <a href="viewDetails/' + data + '" class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3" data-title="View Details?"><i class="bi bi-filetype-pdf"></i></a>';
+                        return '<button type="button" data-title="In Transit This Order?" onclick=inTransitOrders(' + data + ') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3"><i class="bi bi-truck"></i></button> <button type="button" data-title="View This Order?" onclick=viewOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></button>';
                     }
                 }
             ],
@@ -126,14 +136,19 @@ $(document).ready(function(){
             },
             "_columns": [
                 { "data": "order_id" },
+                { "data": "track_num" },
                 { "data": "name" },
-                { "data": "email" },
-                { "data": "lastname" },
-                { "data": "created_at" },
+                { "data": "phone" },
+                {"data": "created_at",
+                "render": function(data) {
+                return moment(data).format('MMM DD, YYYY | hh:mm A');
+                },
+                "targets": 1
+                },
                 {
                     "data": "order_id ",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-pencil-square"></i></button> <button type="button" data-title="Deactivate This?" onclick=deactivateEmployees(' + data + ') class="btn rounded-0 btn-outline-danger btn-sm py-2 px-3"><i class="bi bi-archive-fill"></i></button> <a href="viewDetails/' + data + '" class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3" data-title="View Details?"><i class="bi bi-filetype-pdf"></i></a>';
+                        return '<button type="button" data-title="View This Order?" onclick=viewOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></button>';
                     }
                 }
             ],
@@ -174,10 +189,15 @@ $(document).ready(function(){
             },
             "_columns": [
                 { "data": "order_id" },
+                { "data": "track_num" },
                 { "data": "name" },
-                { "data": "email" },
-                { "data": "lastname" },
-                { "data": "created_at" },
+                { "data": "phone" },
+                {"data": "created_at",
+                "render": function(data) {
+                return moment(data).format('MMM DD, YYYY | hh:mm A');
+                },
+                "targets": 1
+                },
                 {
                     "data": "order_id ",
                     mRender: function (data, type, row) {
@@ -201,3 +221,72 @@ $(document).ready(function(){
         }).draw();
     }
 // TO RECEIVED ORDERS
+
+// UPDATE TO SHIP ORDERS
+    function shipOrders(id){
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to ship this order?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#0C25B6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, continue'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+            url: 'api/toShipOrders',
+            type: 'POST',
+            dataType: 'json',
+            data: {order_id: id},
+        });
+        Swal.fire({
+            title: 'Ship Successfully',
+            text: "Orders was ship successfully",
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500,
+        }).then((result) => {
+        if (result) {
+            $('#newOrdersTable').DataTable().ajax.reload();
+        }
+        });
+        }
+        });
+    }
+// UPDATE TO SHIP ORDERS
+
+
+// UPDATE TO SHIP ORDERS
+function inTransitOrders(id){
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "In Transit this order?",
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#0C25B6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, continue'
+    }).then((result) => {
+    if (result.isConfirmed) {
+        $.ajax({
+        url: 'api/toReceivedOrders',
+        type: 'POST',
+        dataType: 'json',
+        data: {order_id: id},
+    });
+    Swal.fire({
+        title: 'In Transit Successfully',
+        text: "Orders was in transit successfully",
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500,
+    }).then((result) => {
+    if (result) {
+        $('#toShipTable').DataTable().ajax.reload();
+    }
+    });
+    }
+    });
+}
+// UPDATE TO SHIP ORDERS

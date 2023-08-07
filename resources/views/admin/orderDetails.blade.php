@@ -36,7 +36,9 @@
                 <!-- NAV BAR -->
 
                 <!-- MAIN CONTENT -->
-
+                <div class="mainBar container-fluid">
+                    <p>Order ID: {{$order}}</p>
+                </div>
                 <!-- MAIN CONTENT -->
             </div>
         <!-- MAIN CONTENT -->

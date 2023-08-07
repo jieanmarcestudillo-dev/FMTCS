@@ -17,12 +17,12 @@ $(document).ready(function(){
         method:"GET",
         success:function(response){
             var data = "";
-            data+="<option selected>Choose Here</option>";
             for(i=0;i<response.length;i++){
                 data+="<option value='"+response[i].cat_id+"'>"+response[i].cat_name+"</option>"
             }
             $('#itemCategoryFilter').html(data)
             $('#itemCategory').html(data)
+            $('#itemCategory2').html(data)
         },
         error:function(error){
             console.log(error)
@@ -39,11 +39,11 @@ $(document).ready(function(){
         method:"GET",
         success:function(response){
             var data = "";
-            data+="<option selected>Choose Here</option>";
             for(i=0;i<response.length;i++){
                 data+="<option value='"+response[i].supp_id+"'>"+response[i].supp_name+"</option>"
             }
             $('#itemSupplier').html(data)
+            $('#itemSupplier2').html(data)
         },
         error:function(error){
             console.log(error)
@@ -139,3 +139,105 @@ $(document).ready(function(){
         })
     }
 // SORT BY CATEGORY
+
+// DELETE PRODUCT
+    function deleteProduct(id){
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to delete this product?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#0C25B6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+            url: 'api/deleteProduct',
+            type: 'POST',
+            dataType: 'json',
+            data: {prod_id: id},
+        });
+        Swal.fire({
+            title: 'Delete Successfully',
+            text: "Product was delete successfully",
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500,
+        }).then((result) => {
+        if (result) {
+            getAllProducts();
+        }
+        });
+        }
+        });
+    }
+// DELETE PRODUCT
+
+// SHOW PRODUCT
+    function updateProduct(id){
+        $('#showProductModal').modal('show')
+        $.ajax({
+            url: 'api/showProduct',
+            type: 'GET',
+            dataType: 'json',
+            data: {prod_id: id},
+        })
+        .done(function(response) {
+            $('#catPhotos').attr("src",response[0].cat_photos)
+            $('#itemSerialNumber').val(response[0].prod_serial)
+            $('#itemName').val(response[0].prod_name)
+            $('#itemQty').val(response[0].prod_qty)
+            $('#itemCost').val(response[0].prod_cost)
+            $('#itemPrice').val(response[0].prod_price)
+            $('#itemDescription').val(response[0].prod_desc)
+            $('#itemCategory2').val(response[0].category)
+            $('#itemSupplier2').val(response[0].supplier)
+            $('#prod_id').val(response[0].prod_id)
+        })
+    }
+// SHOW PRODUCT
+
+// UPDATE PRODUCT
+    $(document).ready(function () {
+        $('#updateProduct').on( 'submit' , function(e){
+            e.preventDefault();
+            var currentForm = $('#updateProduct')[0];
+            var data = new FormData(currentForm);
+            $.ajax({
+                url: "api/updateProduct",
+                type:"POST",
+                method:"POST",
+                dataType: "text",
+                data:data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(response){
+                    if(response == 1){
+                        const input = document.getElementById("itemImage");
+                        input.value = "";
+                        getAllProducts();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'PRODUCT HAS BEEN UPDATED',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }else if(response == 0){
+                        // SOMETHING WRONG IN BACKEND
+                        Swal.fire(
+                        'Added Failed',
+                        'Sorry product has not update',
+                        'error'
+                        )
+                    }
+                },
+                error:function(error){
+                    console.log(error)
+                }
+            });
+        });
+    });
+// UPDATE PRODUCT

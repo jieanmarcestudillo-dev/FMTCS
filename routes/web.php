@@ -58,6 +58,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminToReceived', [Controller::class,'adminToReceived'])->name('adminToReceived');
     Route::get('adminCompletedOrders', [Controller::class,'adminCompletedOrders'])->name('adminCompletedOrders');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
+    Route::get('orderDetails/{id}', [OrderController::class,'orderDetails']);
 });
 
 # ENDS HERE ADMIN ROUTES

@@ -114,6 +114,45 @@ $(document).ready(function(){
 // SHOW CATEGORY
 
 // UPDATE CATEGORY
-
-
+    $(document).ready(function () {
+    $('#updateCategoryForm').on( 'submit' , function(e){
+        e.preventDefault();
+        var currentForm = $('#updateCategoryForm')[0];
+        var data = new FormData(currentForm);
+        $.ajax({
+            url: "api/updateCategory",
+            type:"POST",
+            method:"POST",
+            dataType: "text",
+            data:data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(response){
+                if(response == 1){
+                    const input = document.getElementById("categoryPhotos");
+                    input.value = "";
+                    getAllCategories();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'CATEGORY HAS BEEN UPDATED',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }else if(response == 0){
+                    // SOMETHING WRONG IN BACKEND
+                    Swal.fire(
+                    'Added Failed',
+                    'Sorry category has not update',
+                    'error'
+                    )
+                }
+            },
+            error:function(error){
+                console.log(error)
+            }
+        });
+    });
+    });
 // UPDATE CATEGORY

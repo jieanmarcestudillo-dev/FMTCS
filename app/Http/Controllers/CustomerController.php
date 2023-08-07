@@ -8,7 +8,7 @@ class CustomerController extends Controller
 {
     // GET ALL CUSTOMERS
         public function getAllCustomers(){
-            return response()->json(User::where([['role', '=', 'USER']])->get());
+            return response()->json(User::where([['role', '=', 'USER']])->orderBy('created_at', 'DESC')->get());
         }
     // GET ALL CUSTOMERS
 }

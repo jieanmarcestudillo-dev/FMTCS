@@ -47,7 +47,7 @@
                                                 </div>
                                                 <div class="col-8 text-center cardInfo">
                                                     <p class="card-text fw-bold cardText">TOTAL SALES</p>
-                                                    <p class="card-text fw-bold cardNo"id="totalSales">₱1234.00</p>
+                                                    <p class="card-text fw-bold cardNo"id="totalSales"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                                 </div>
                                                 <div class="col-8 text-center cardInfo">
                                                     <p class="card-text fw-bold cardText">PRODUCT SOLD</p>
-                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalProductsSold">153</p>
+                                                    <p class="card-text fw-bold pe-2 cardNo"id="totalProductsSold"></p>
                                                 </div>
                                             </div>
                                         </div>

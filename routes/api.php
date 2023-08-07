@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::get('getToShipOrders', [OrderController::class,'getToShipOrders']);
         Route::get('getToReceivedOrders', [OrderController::class,'getToReceivedOrders']);
         Route::get('getCompletedOrders', [OrderController::class,'getCompletedOrders']);
+        Route::post('toShipOrders', [OrderController::class,'toShipOrders']);
+        Route::post('toReceivedOrders', [OrderController::class,'toReceivedOrders']);
     // ORDERS PAGE
 
     // CATEGORY PAGE
@@ -29,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::post('addCategory', [CategoryController::class,'addCategory']);
         Route::post('deleteCategory', [CategoryController::class,'deleteCategory']);
         Route::get('showCategory', [CategoryController::class,'showCategory']);
+        Route::post('updateCategory', [CategoryController::class,'updateCategory']);
     // CATEGORY PAGE
 
     // CUSTOMER PAGE
@@ -47,6 +50,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::get('searchProducts', [ProductController::class,'searchProducts']);
         Route::get('sortByCategory', [ProductController::class,'sortByCategory']);
         Route::post('addProduct', [ProductController::class,'addProduct']);
+        Route::post('deleteProduct', [ProductController::class,'deleteProduct']);
+        Route::get('showProduct', [ProductController::class,'showProduct']);
+        Route::post('updateProduct', [ProductController::class,'updateProduct']);
     // PRODUCT PAGE
 
     // SUPPLIER PAGE
@@ -54,6 +60,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::post('addSupplier', [SupplierController::class,'addSupplier']);
         Route::post('deleteSupplier', [SupplierController::class,'deleteSupplier']);
         Route::get('getSupplier', [SupplierController::class,'getSupplier']);
+        Route::post('updateSupplier', [SupplierController::class,'updateSupplier']);
     // SUPPLIER PAGE
 // ADMIN API
 

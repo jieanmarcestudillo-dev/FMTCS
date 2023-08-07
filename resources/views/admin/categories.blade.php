@@ -89,12 +89,12 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="floatingTextarea2">Image</label>
-                                            <input required type="hidden" name="cat_id" id="cat_id">
-                                            <input required type="file" name="categoryPhotos" id="categoryPhotos" class="form-control rounded-0 py-3 text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                            <input type="hidden" name="cat_id" id="cat_id">
+                                            <input type="file" name="categoryPhotos" id="categoryPhotos" class="form-control rounded-0 py-3 text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                                         </div>
                                         <div class="mb-3 mt-2">
                                             <label for="floatingTextarea2">Name</label>
-                                            <input required type="text" name="categoryName" id="categoryName" class="form-control rounded-0 py-3 text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                            <input type="text" name="categoryName" id="categoryName" class="form-control rounded-0 py-3 text-center" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

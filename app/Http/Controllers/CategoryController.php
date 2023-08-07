@@ -56,22 +56,40 @@ class CategoryController extends Controller
     }
 
     public function updateCategory(Request $request){
-        $category = Category::find($request->input('category_id'));
+        // MARVIN BACKEND
+            // $category = Category::find($request->input('category_id'));
 
-        $category->cat_name = $request->input('name');
-        $category->cat_class = $request->input('class');
+            // $category->cat_name = $request->input('name');
+            // $category->cat_class = $request->input('class');
 
-        $log = ' has updated category ' . $category->cat_name . ' details';
+            // $log = ' has updated category ' . $category->cat_name . ' details';
 
-        App::make(LogController::class)->addLogs($log);
+            // App::make(LogController::class)->addLogs($log);
 
-        if($category->save()){
-            Log::info('success');
-            return response()->json(['result' => 'success']);
-        }else{
-            Log::info("failed");
-            return response()->json(['result' => 'failed']);
-        }
+            // if($category->save()){
+            //     Log::info('success');
+            //     return response()->json(['result' => 'success']);
+            // }else{
+            //     Log::info("failed");
+            //     return response()->json(['result' => 'failed']);
+            // }
+        // MARVIN BACKEND
+
+        // NEW BACKEND
+            if ($request->hasFile('categoryPhotos')) {
+                $filename = $request->file('categoryPhotos');
+                $imageName =   time().rand() . '.' .  $filename->getClientOriginalExtension();
+                $path = $request->file('categoryPhotos')->storeAs('category', $imageName, 'public');
+                $imageData['categoryPhotos'] = '/storage/'.$path;
+                $updateCategory = Category::where('cat_id', '=' ,$request->cat_id)->update([
+                    'cat_photos' =>  $imageData['categoryPhotos'],
+                    'cat_name' => $request->categoryName,
+                ]);
+                return response()->json($updateCategory ? 1 : 0);
+            }else{
+                return response()->json(Category::where('cat_id', '=' ,$request->cat_id)->update(['cat_name' => $request->categoryName]) ? 1 : 0);
+            }
+        // NEW BACKEND
     }
 
     public function deleteCategory(Request $request){

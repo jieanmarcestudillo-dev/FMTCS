@@ -59,22 +59,30 @@ class SupplierController extends Controller
     }
 
     public function updateSupplier(Request $request){
-        $supplier = Suppliers::find($request->input('supplier_id'));
+        // MARVIN BACKEND
+            // $supplier = Suppliers::find($request->input('supplier_id'));
 
-        $supplier->supp_name = $request->input('name');
-        $supplier->supp_address = $request->input('address');
-        $supplier->supp_contact = $request->input('contact');
-        $supplier->supp_email = $request->input('email');
+            // $supplier->supp_name = $request->input('name');
+            // $supplier->supp_address = $request->input('address');
+            // $supplier->supp_contact = $request->input('contact');
+            // $supplier->supp_email = $request->input('email');
 
-        $log = ' has updated supplier ' . $supplier->supp_name . ' details';
+            // $log = ' has updated supplier ' . $supplier->supp_name . ' details';
 
-        App::make(LogController::class)->addLogs($log);
+            // App::make(LogController::class)->addLogs($log);
 
-        if($supplier->save()){
-            return response()->json(['result' => 'success']);
-        }else{
-            return response()->json(['result' => 'failed']);
-        }
+            // if($supplier->save()){
+            //     return response()->json(['result' => 'success']);
+            // }else{
+            //     return response()->json(['result' => 'failed']);
+            // }
+        // MARVIN BACKEND
+
+        // NEW BACKEND
+            return response()->json(Suppliers::where('supp_id', '=' ,$request->supp_id)->update(
+            ['supp_name' => $request->fullname],['supp_address' => $request->address],['supp_contact' => $request->contact],
+            ['supp_email' => $request->email]) ? 1 : 0);
+        // NEW BACKEND
     }
 
     public function deleteSupplier(Request $request){

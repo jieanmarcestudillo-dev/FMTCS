@@ -28,8 +28,8 @@ class ProductController extends Controller
                                 <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
                                 <p class='card-text'>Serial Number: $item->prod_serial</p>
                                 <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
-                                <button type='button' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
-                                <button type='button' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
+                                <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
+                                <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
                                 </div>
                             </div>
                             </div>
@@ -190,42 +190,85 @@ class ProductController extends Controller
         }
     }
 
+    public function showProduct(Request $request){
+        $result = Products::select('products.*','category.cat_name','suppliers.supp_name')->join('category','products.category', '=','category.cat_id')
+        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->where('products.prod_id', '=', $request->prod_id)->get();
+        return response()->json($result);
+    }
+
     public function updateProduct(Request $request){
-        $product = Products::find($request->input('product_id'));
+        // MARVIN BACKEND
+            // $product = Products::find($request->input('product_id'));
+            // $product->prod_name = $request->input('name');
+            // $product->prod_desc = $request->input('description');
+            // $product->prod_qty = $request->input('qty');
+            // $product->prod_cost = $request->input('cost');
+            // $product->prod_price = $request->input('price');
+            // $product->category = $request->input('category');
+            // $product->supplier = $request->input('supplier');
+            // $product->prod_serial = $request->input('serial');
+            // $product->prod_pic = $request->input('pic');
+            // $log = ' has updated product ' . $product->prod_name . ' details';
+            // App::make(LogController::class)->addLogs($log);
+            // if($product->save()){
+            //     return response()->json(['result' => 'success']);
+            // }else{
+            //     return response()->json(['result' => 'failed']);
+            // }
+        // MARVIN BACKEND
 
-        $product->prod_name = $request->input('name');
-        $product->prod_desc = $request->input('description');
-        $product->prod_qty = $request->input('qty');
-        $product->prod_cost = $request->input('cost');
-        $product->prod_price = $request->input('price');
-        $product->category = $request->input('category');
-        $product->supplier = $request->input('supplier');
-        $product->prod_serial = $request->input('serial');
-        $product->prod_pic = $request->input('pic');
-
-        $log = ' has updated product ' . $product->prod_name . ' details';
-
-        App::make(LogController::class)->addLogs($log);
-
-        if($product->save()){
-            return response()->json(['result' => 'success']);
-        }else{
-            return response()->json(['result' => 'failed']);
-        }
+        // NEW BACKEND
+            if ($request->hasFile('itemImage')) {
+                $filename = $request->file('itemImage');
+                $imageName =   time().rand() . '.' .  $filename->getClientOriginalExtension();
+                $path = $request->file('itemImage')->storeAs('item', $imageName, 'public');
+                $imageData['itemImage'] = '/storage/'.$path;
+                $updateCategory = Products::where('prod_id', '=' ,$request->prod_id)->update([
+                    'prod_name' => $request->itemName,
+                    'prod_desc' => $request->itemDescription,
+                    'prod_qty' => $request->itemQty,
+                    'prod_cost' => $request->itemCost,
+                    'prod_price' => $request->itemPrice,
+                    'category' => $request->itemCategory,
+                    'supplier' => $request->itemSupplier,
+                    'prod_serial' => $request->itemSerialNumber,
+                    'prod_pic' =>  $imageData['itemImage'],
+                ]);
+                return response()->json($updateCategory ? 1 : 0);
+            }else{
+                $updateCategory = Products::where('prod_id', '=' ,$request->prod_id)->update([
+                    'prod_name' => $request->itemName,
+                    'prod_desc' => $request->itemDescription,
+                    'prod_qty' => $request->itemQty,
+                    'prod_cost' => $request->itemCost,
+                    'prod_price' => $request->itemPrice,
+                    'category' => $request->itemCategory,
+                    'supplier' => $request->itemSupplier,
+                    'prod_serial' => $request->itemSerialNumber,
+                ]);
+                return response()->json($updateCategory ? 1 : 0);
+            }
+        // NEW BACKEND
     }
 
     public function deleteProduct(Request $request){
-        $product = Products::find($request->input('product_id'));
+        // MARVIN BACKEND
+            // $product = Products::find($request->input('product_id'));
 
-        $log = ' has deleted a product with an ID of ' . $request->input('product_id');
+            // $log = ' has deleted a product with an ID of ' . $request->input('product_id');
 
-        App::make(LogController::class)->addLogs($log);
+            // App::make(LogController::class)->addLogs($log);
 
-        if($product->delete()){
-            return response()->json(['result' => 'success']);
-        }else{
-            return response()->json(['result' => 'failed']);
-        }
+            // if($product->delete()){
+            //     return response()->json(['result' => 'success']);
+            // }else{
+            //     return response()->json(['result' => 'failed']);
+            // }
+        // MARVIN BACKEND
+
+        // NEW BACKEND
+            return response()->json(Products::where([['prod_id', '=', $request->prod_id]])->delete() ? 1 : 0);
+        // NEW BACKEND
     }
 
     public function getProduct(Request $request){
