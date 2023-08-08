@@ -318,4 +318,11 @@ class ProductController extends Controller
         return response()->json($result);
 
     }
+
+    public function getAllProductsForUser(){
+        $result = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->get();
+        return response()->json($result);
+    }
 }

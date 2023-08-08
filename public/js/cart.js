@@ -1,4 +1,4 @@
-
+document.getElementById('processOrderBtn').click();
 
 window.onload = loadShoppingCart();
 
@@ -15,7 +15,8 @@ function loadShoppingCart(){
 	let price = 0;
 	let qty = 0;
 	let total = 0;
-	console.log(1);
+	let shipping_fee = 100;
+	console.log(localStorage);
 	if(localStorage.length > 0){
 		console.log(2);
 		let size = item.length;
@@ -53,6 +54,7 @@ function loadShoppingCart(){
 				</tr>
 				`;
 				document.getElementById('total_price').innerHTML = number_format(total);
+				document.getElementById('final_price').innerHTML = number_format(total + shipping_fee);
 				cartList.innerHTML = data;
 			}
 			localStorage.setItem('total',total);
@@ -65,6 +67,7 @@ function loadShoppingCart(){
 		cartList.innerHTML = '';
 		checkout.style.display = 'none';
 	}
+	localStorage.setItem('fee',shipping_fee);
 }
 
 function addedCart(id){
@@ -121,18 +124,18 @@ function number_format(value){
 
 function check_out(){
 	let payment_type = document.getElementById('payment_type').value;
-
+	let total = parseInt(localStorage.getItem('total'));
+	let orders = localStorage.getItem('cart');
+	let shipping_fee = parseInt(localStorage.getItem('fee'));
+	total += shipping_fee;
+	console.log(total);
 	if(payment_type == 0){
 		Swal.fire({
 			icon:'warning',
 			title:'Process Failed!',
-			text:'Select you payment method'
+			text:'Select your payment method'
 		})
 	}else if(payment_type == 1){
-		let total = localStorage.getItem('total');
-		let orders = localStorage.getItem('cart');
-		console.log(total);
-		console.log(orders);
 
 		$.ajax({
 			url:'order/processOrder',
@@ -160,6 +163,50 @@ function check_out(){
 			}
 		})
 	}else{
-
+		document.getElementById('checkOutBtn').disabled = true;
+		$.ajax({
+			url:'/order/onlinePayment',
+			data:{
+				total:total
+			},
+			success:function(result){
+				console.log(result);
+				location.replace(result.url);
+			}
+		})
 	}
+}
+
+function check_out2(){
+	let total = parseInt(localStorage.getItem('total'));
+	let orders = localStorage.getItem('cart');
+	let shipping_fee = parseInt(localStorage.getItem('fee'));
+	total += shipping_fee;
+	console.log(total);
+	
+		$.ajax({
+			url:'order/processOrder',
+			data:{
+				total:total,
+				order:orders
+			},
+			success:function(result){
+
+				if(result.message == 'success'){
+					localStorage.clear();
+					loadShoppingCart();
+					Swal.fire({
+						icon:'success',
+						title:'Process Succeed',
+						text:'Order has been processed'
+					})
+				}else{
+					Swal.fire({
+						icon:'error',
+						title:'Process Failed',
+						text:'Something went wrong'
+					})
+				}
+			}
+		})
 }

@@ -16,6 +16,8 @@
         @include('layouts.navbar')
     {{-- NAV BAR --}}
 
+    
+
     <div style="margin-top: 10rem;"></div>
     
     <div class="container">
@@ -78,7 +80,7 @@
                             <span>
                                 Php
                                 <span >
-                                    150
+                                    100
                                 </span>
                             </span>
                         </p>
@@ -89,7 +91,7 @@
                         <p class="col-6 d-flex justify-content-end" style="text-align: justify; padding-right:30px;">
                             <span>
                                 Php
-                                <span >
+                                <span id="final_price">
                                     1,500
                                 </span>
                             </span>
@@ -107,11 +109,19 @@
                         </p>
                     </div>
                     <hr style="position:relative; top:-10px;">
-                    <button class="btn rounded-0 text-white form-control" onclick="check_out()" style="background-color:#0C25B6">Proceed to Payment</button>
+                    <button class="btn rounded-0 text-white form-control" id="checkOutBtn" onclick="check_out()" style="background-color:#0C25B6">Proceed to Payment</button>
                 </div>
             </div>
         </div>
     </div>
+
+    @php
+        $amount = request()->input('amount');
+        $referenceId = request()->input('referenceId');
+    @endphp
+
+    <button hidden id="processOrderBtn" @if(isset($amount) && isset($referenceId)) onclick="check_out2()" @endif>Button Text</button>
+
 
     {{-- NAV BAR --}}
         @include('layouts.footer')

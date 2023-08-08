@@ -161,4 +161,52 @@ class OrderController extends Controller
         ->join('users','orders.user_id', '=', 'users.id')->where('order_id', $id)->first();
         return view('admin.orderDetails', compact('order'));
     }
+
+    public function processOnlinePayment(Request $request){
+        $amount = $request->input('total');
+        $nonce = round(microtime(true) * 1000);
+        $redirect_uri = 'http://127.0.0.1:8000/viewCart';
+
+        //live account
+        //$link = 'https://api.nextpay.world/v2/paymentlinks';
+        //$secret = 'u7t4rlw251kqr1tdkziw6iqo';
+        //$client_key = 'ck_rb1f8rpm5oyd68x39ochcatl';
+
+        //sandbox account
+        $link ='https://api-sandbox.nextpay.world/v2/paymentlinks';
+        $secret = 'a8h27lno8icjwcdk3pyppi7a';
+        $client_key = 'ck_sandbox_jg6hsrlhxudza4pfgprhga8l';
+        
+
+        $client = new \GuzzleHttp\Client();
+
+        $data = [
+            "title" => "FMTCS Industrial Corp.",
+            "amount" => $amount,
+            "currency" => "PHP",
+            "description" => "Thank you for placing your trust in our services. We look forward to serving you again in the future. If you have any further questions or need assistance, please don't hesitate to reach out. We strive to make your experience with us perfect every time.",
+            "private_notes" => "string",
+            "limit" => 1,
+            "redirect_url" => $redirect_uri,
+            "nonce" => $nonce, // Generate a timestamp-based nonce
+        ];
+
+        $signature = hash_hmac('sha256', json_encode($data,JSON_UNESCAPED_SLASHES), $secret);
+
+        $response = $client->request('POST', $link, [
+          'body' => json_encode($data),
+          'headers' => [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'client-id' => $client_key,
+            'idempotency-key' => '',
+            'signature' => $signature,
+          ],
+        ]);
+
+        $responseBody = $response->getBody();
+
+        return response($responseBody, 200)->header('Content-Type', 'application/json');
+    }
+
 }

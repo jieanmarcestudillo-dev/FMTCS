@@ -28,13 +28,14 @@ Route::get('dashboard', function () {
 
 Route::get('viewProducts', [Controller::class,'viewProducts'])->name('viewProducts');
 Route::get('viewCart', [Controller::class,'viewCart'])->name('viewCart');
-Route::get('/products/getAll', [ProductController::class, 'getAllProducts']);
+Route::get('/products/getAll', [ProductController::class, 'getAllProductsForUser']);
 Route::get('/products/getSorted', [ProductController::class, 'getSortedProducts']);
 Route::get('/products/getDetailsById', [ProductController::class, 'getProductsById']);
 Route::get('/products/getTopSales', [OrderDetailController::class, 'getTopSales']);
 Route::get('/products/getProduct', [ProductController::class, 'getProduct']);
 Route::get('/products/getByCategory', [ProductController::class, 'getProductByCategory']);
 Route::get('/order/processOrder', [OrderController::class, 'processOrder']);
+Route::get('/order/onlinePayment', [OrderController::class, 'processOnlinePayment']);
 Route::get('category/getAll', [CategoryController::class, 'getCategories']);
 Route::get('/checkAuthenticated', [ProfileController::class, 'check_authenticated']);
 
