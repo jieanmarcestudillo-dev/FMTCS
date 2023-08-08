@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Orders;
 use App\Models\OrderDetail;
+use App\Models\Products;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -155,11 +157,41 @@ class OrderController extends Controller
         return response()->json(Orders::where('order_id', '=', $request->order_id)->update(['status' => 'COMPLETE']) ? 1 : 0);
     }
 
-    public function orderDetails($id)
+    public function viewOrderDetails()
     {
-        $order = Orders::select('orders.*','users.name','users.address','users.phone')
-        ->join('users','orders.user_id', '=', 'users.id')->where('order_id', $id)->first();
-        return view('admin.orderDetails', compact('order'));
+        return view('admin.orderDetails');
+    }
+
+    public function getOrderDetails(Request $request){
+      $order = OrderDetail::select('order_details.order_details_id','order_details.qty','order_details.price','order_details.total','products.prod_name',
+      'products.prod_price','products.prod_pic')->join('products','products.prod_id', '=', 'order_details.prod_id')
+       ->where('order_details.detail_id', $request->orderId)->get();
+       $rowNumber = 0;
+        foreach($order as $item){
+            $rowNumber++;
+            echo "
+                <tr>
+                    <td class='fw-bold text-muted'>$rowNumber</td>
+                    <td><img class='img-fluid' style='height:80px;' src='$item->prod_pic'></td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>$item->prod_name</td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>Php $item->prod_price.00</td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>$item->qty</td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>Php $item->total.00</td>
+                </tr>
+            ";
+        }
+    }
+
+    public function getCustomer(Request $request){
+        $data = Orders::select('orders.created_at','users.name','users.address','users.phone')
+        ->join('users','orders.user_id', '=', 'users.id')->where('orders.order_id', $request->orderId)->first();
+        return response()->json($data);
+    }
+
+    public function getTotal(Request $request){
+        $data = OrderDetail::where('detail_id', $request->orderId)->sum('price');
+        $total = $data + 100;
+        return response()->json('Php '.$total.'.00');
     }
 
     public function processOnlinePayment(Request $request){
@@ -176,7 +208,7 @@ class OrderController extends Controller
         $link ='https://api-sandbox.nextpay.world/v2/paymentlinks';
         $secret = 'a8h27lno8icjwcdk3pyppi7a';
         $client_key = 'ck_sandbox_jg6hsrlhxudza4pfgprhga8l';
-        
+
 
         $client = new \GuzzleHttp\Client();
 
@@ -207,6 +239,18 @@ class OrderController extends Controller
         $responseBody = $response->getBody();
 
         return response($responseBody, 200)->header('Content-Type', 'application/json');
+    }
+
+    public function printCompletedOrders(Request $request){
+        $order = Orders::select('orders.*','users.name','users.address','users.phone')
+        ->join('users','orders.user_id', '=', 'users.id')->get();
+        foreach($order as $item){
+            $completedOrders = [
+                'data' => $data
+            ];
+        }
+        $pdf = PDF::loadView('fetch.admin.printOperation', $completedOrders)->setPaper('A4', 'portrait');
+        return $pdf->stream('Completed Orders.pdf');
     }
 
 }

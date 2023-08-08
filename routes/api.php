@@ -22,8 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::get('getToShipOrders', [OrderController::class,'getToShipOrders']);
         Route::get('getToReceivedOrders', [OrderController::class,'getToReceivedOrders']);
         Route::get('getCompletedOrders', [OrderController::class,'getCompletedOrders']);
+        Route::get('getCustomer', [OrderController::class,'getCustomer']);
+        Route::get('getOrderDetails', [OrderController::class,'getOrderDetails']);
+        Route::get('getTotal', [OrderController::class,'getTotal']);
         Route::post('toShipOrders', [OrderController::class,'toShipOrders']);
         Route::post('toReceivedOrders', [OrderController::class,'toReceivedOrders']);
+        Route::post('getOrderDetails', [OrderController::class,'getOrderDetails']);
     // ORDERS PAGE
 
     // CATEGORY PAGE

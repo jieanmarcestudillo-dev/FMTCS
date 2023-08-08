@@ -51,6 +51,10 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">&nbsp;&nbsp;Completed Orders&nbsp;&nbsp;</a>
                             </li>
+                            <li class="nav-item ms-auto">
+                                <button type="button" class="btn text-white btn-sm rounded-0" style="background-color: #0C25B6">EXPORT IN PDF</button>
+                                <button type="button" class="btn text-white btn-sm rounded-0" style="background-color: #0C25B6">EXPORT IN CSV</button>
+                            </li>
                         </ul>
                             <table id="completedOrdersTable" class="table table-sm table-bordered text-center align-middle">
                                 <thead>

@@ -3,6 +3,7 @@ $(document).ready(function(){
     toShipOrders();
     toReceivedOrders();
     completedOrders();
+    getCustomer();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -42,7 +43,7 @@ $(document).ready(function(){
                 {
                     "data": "order_id",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3"><i class="bi bi-box"></i></button> <a href="orderDetails/' + data + '" data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a>';
+                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3"><i class="bi bi-box"></i></button> <a type="button" onclick=viewOrders(' + data + ') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a>';
                     }
                 }
             ],
@@ -95,7 +96,7 @@ $(document).ready(function(){
                 {
                     "data": "order_id",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="In Transit This Order?" onclick=inTransitOrders(' + data + ') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3"><i class="bi bi-truck"></i></button> <button type="button" data-title="View This Order?" onclick=viewOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></button>';
+                        return '<button type="button" data-title="In Transit This Order?" onclick=inTransitOrders(' + data + ') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3"><i class="bi bi-truck"></i></button> <a type="button" onclick=viewOrders(' + data + ') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a>';
                     }
                 }
             ],
@@ -146,9 +147,9 @@ $(document).ready(function(){
                 "targets": 1
                 },
                 {
-                    "data": "order_id ",
+                    "data": "order_id",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="View This Order?" onclick=viewOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></button>';
+                        return '<a type="button" onclick=viewOrders(' + data + ') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a>';
                     }
                 }
             ],
@@ -169,7 +170,7 @@ $(document).ready(function(){
     }
 // TO RECEIVED ORDERS
 
-// TO RECEIVED ORDERS
+// TO COMPLETED ORDERS
     function completedOrders(){
         var table = $('#completedOrdersTable').DataTable({
             "language": {
@@ -201,7 +202,7 @@ $(document).ready(function(){
                 {
                     "data": "order_id ",
                     mRender: function (data, type, row) {
-                        return '<button type="button" data-title="Ship This Order?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-pencil-square"></i></button> <button type="button" data-title="Deactivate This?" onclick=deactivateEmployees(' + data + ') class="btn rounded-0 btn-outline-danger btn-sm py-2 px-3"><i class="bi bi-archive-fill"></i></button> <a href="viewDetails/' + data + '" class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3" data-title="View Details?"><i class="bi bi-filetype-pdf"></i></a>';
+                        return '<button type="button" data-title="View Orders?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-box"></i></button> <a type="button" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3" data-title="Print Orders?"><i class="bi bi-filetype-pdf"></i></a>';
                     }
                 }
             ],
@@ -220,7 +221,7 @@ $(document).ready(function(){
             });
         }).draw();
     }
-// TO RECEIVED ORDERS
+// TO COMPLETED ORDERS
 
 // UPDATE TO SHIP ORDERS
     function shipOrders(id){
@@ -290,3 +291,11 @@ function inTransitOrders(id){
     });
 }
 // UPDATE TO SHIP ORDERS
+
+
+// VIEW ORDERS
+    function viewOrders(id){
+        localStorage.setItem('orderId', id);
+        window.location.href = '/viewOrderDetails';
+    }
+// VIEW ORDERS

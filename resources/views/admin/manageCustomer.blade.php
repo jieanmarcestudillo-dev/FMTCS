@@ -43,7 +43,7 @@
                                 <tr>
                                     <th class="text-center">No.</th>
                                     <th class="text-center">Name</th>
-                                    <th class="text-center">Address</th>
+                                    <th class="text-center col-3">Address</th>
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Email</th>
                                     <th class="text-center col-2">Joined</th>
