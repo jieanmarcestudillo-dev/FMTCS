@@ -127,6 +127,14 @@ class OrderController extends Controller
             $id = $orders->id;
 
             for($x = 0; $x < $size; $x++){
+
+                $products = Products::find($cart[$x]->item_id);
+                
+                if($products){
+                    $products->prod_qty = intval($products->prod_qty) - intval($cart[$x]->item_qty);
+                    $products->save();
+                }
+
                 $order_detail = new OrderDetail();
                 $order_detail->detail_id = $id;
                 $order_detail->prod_id = $cart[$x]->item_id;
@@ -134,6 +142,8 @@ class OrderController extends Controller
                 $order_detail->price = $cart[$x]->item_price;
                 $order_detail->total = $cart[$x]->item_price * $cart[$x]->item_qty;
                 $order_detail->save();
+
+
             }
             return response()->json([
                 'message' => 'success'

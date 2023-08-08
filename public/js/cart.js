@@ -17,7 +17,9 @@ function loadShoppingCart(){
 	let total = 0;
 	let shipping_fee = 100;
 	console.log(localStorage);
+
 	if(localStorage.length > 0){
+		localStorage.setItem('fee',shipping_fee);
 		console.log(2);
 		let size = item.length;
 		if(size > 0){
@@ -32,7 +34,7 @@ function loadShoppingCart(){
 					<td>
 						<div class="row">
 							<div class="col-4">
-								<img src="/image/products/${item[x].item_pic}" height="50px;">
+								<img src="${item[x].item_pic}" height="50px;">
 							</div>
 							<div class="col-8">
 								<p>${item[x].item_name}</p>
@@ -67,7 +69,7 @@ function loadShoppingCart(){
 		cartList.innerHTML = '';
 		checkout.style.display = 'none';
 	}
-	localStorage.setItem('fee',shipping_fee);
+	
 }
 
 function addedCart(id){

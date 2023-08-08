@@ -30,7 +30,7 @@ function loadProducts(){
 				id = data[x].prod_id;
 				 productCard += `
 					<div class="card m-3 p-3 flex-grow-1" style="width:200px;">
-					    <img src="/image/products/${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
+					    <img src="${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
 					    <div class="card-body text-center">
 					        <h2 class="card-text text-center mt-0 fs-4 fw-bold">${data[x].prod_name}</h2>
 					        <p class="text-muted">${data[x].cat_name}</p>
@@ -53,7 +53,7 @@ function view_product_details(id){
 		},
 		success:function(data){
 			console.log(data);
-			let path = '/image/products/' + data[0].prod_pic;
+			let path = data[0].prod_pic;
 			document.getElementById('details_id').value = data[0].prod_id;
 			document.getElementById('details_img').src = path;
 			document.getElementById('details_price').innerHTML = number_format(data[0].prod_price);
@@ -100,7 +100,7 @@ function loadFilteredProducts(value){
 				id = data[x].prod_id;
 				 productCard += `
 					<div class="card m-3 p-3 flex-grow-1" style="width:200px;">
-					    <img src="/image/products/${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
+					    <img src="${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
 					    <div class="card-body text-center">
 					        <h2 class="card-text text-center mt-0 fs-4 fw-bold">${data[x].prod_name}</h2>
 					        <p class="text-muted">${data[x].cat_name}</p>
@@ -132,7 +132,7 @@ function sort_products(value){
 				id = data[x].prod_id;
 				 productCard += `
 					<div class="card m-3 p-3 flex-grow-1" style="width:200px;">
-					    <img src="/image/products/${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
+					    <img src="${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
 					    <div class="card-body text-center">
 					        <h2 class="card-text text-center mt-0 fs-4 fw-bold">${data[x].prod_name}</h2>
 					        <p class="text-muted">${data[x].cat_name}</p>

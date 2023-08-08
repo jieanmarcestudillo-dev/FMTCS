@@ -15,7 +15,7 @@ function loadTopSales(){
 				id = data[x].prod_id;
 				 productCard += `
 					<div class="card m-3 p-3 flex-grow-1" style="width:200px;">
-					    <img src="/image/products/${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
+					    <img src="${data[x].prod_pic}" alt="Card Image" style="max-width: 200px; margin: 0 auto">
 					    <div class="card-body text-center">
 					        <h2 class="card-text text-center mt-0 fs-4 fw-bold">${data[x].prod_name}</h2>
 					        <p class="text-muted">${data[x].cat_name}</p>

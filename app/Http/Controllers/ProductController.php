@@ -54,11 +54,13 @@ class ProductController extends Controller
         if($id == 1){
             $result = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
+            ->where('products.prod_qty','>',0)
             ->orderBy('prod_price')
             ->get();
         }else if($id == 2){
             $result = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
+            ->where('products.prod_qty','>',0)
             ->orderBy('prod_price', 'DESC')
             ->get();
         }
@@ -287,11 +289,13 @@ class ProductController extends Controller
         if($request->input('category_id') == 0){
             $product = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
+            ->where('products.prod_qty','>',0)
             ->get();
         }else{
             $product = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
             ->where('category.cat_id',$request->input('category_id'))
+            ->where('products.prod_qty','>',0)
             ->get();
         }
 
@@ -322,6 +326,7 @@ class ProductController extends Controller
     public function getAllProductsForUser(){
         $result = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
+            ->where('products.prod_qty','>',0)
             ->get();
         return response()->json($result);
     }

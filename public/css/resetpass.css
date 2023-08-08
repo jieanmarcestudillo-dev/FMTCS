@@ -1,0 +1,26 @@
+#body {
+    background-image: url('/image/frontend/banner-2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+}
+
+#body div div{
+	background-color: rgba(217, 217, 217, 0.9);
+	padding: 2rem;
+}
+
+#body div div form > div{
+	background-color: transparent;
+	text-align: left;
+}
+
+.btn{
+		position: relative;
+		top: -50px;
+		
+}
+#submit{
+	border-radius: 25px;
+	background-color: #3B53DE;
+}
