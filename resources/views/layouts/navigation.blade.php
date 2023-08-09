@@ -35,11 +35,12 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('viewOrder') }}">Order History</a></li>
                             <li>
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button class="dropdown-item" type="submit" onclick="event.preventDefault(); this.closest('form').submit();">Log Out</button>
+                                    <button style="background-color:transparent; color:#0C25B6; border:none;" class="dropdown-item" type="submit" onclick="event.preventDefault(); this.closest('form').submit();">Log Out</button>
                                 </form>
                             </li>
                         </ul>

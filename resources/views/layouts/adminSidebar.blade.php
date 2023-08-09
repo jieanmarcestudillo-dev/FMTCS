@@ -10,7 +10,7 @@
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminSupplier"><i class="bi bi-buildings pe-3"></i> Supplier</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminViewProducts"><i class="bi bi-bag pe-3"></i> Products</a>
         <a class="list-group-item list-group-item-action list-group-item-light" href="/adminManageCustomers"><i class="bi bi-people-fill pe-3"></i> Manage Customers</a>
-        <a class="list-group-item list-group-item-action list-group-item-light" href="{{route('profile.edit')}}"><i class="bi bi-person-square pe-3"></i> Manage Account</a>
+        <a class="list-group-item list-group-item-action list-group-item-light" href="{{route('profile.editAdmin')}}"><i class="bi bi-person-square pe-3"></i> Manage Account</a>
     </div>
     <div class="sidebar-footing border-top pt-4 text-center">
         <p class="text-center" id="dateDisplay"></p>

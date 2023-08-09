@@ -194,6 +194,34 @@ class OrderController extends Controller
         }
     }
 
+    public function getOrderDetails2(Request $request){
+      $order = OrderDetail::select('order_details.order_details_id','order_details.qty','order_details.price','order_details.total','products.prod_name',
+      'products.prod_price','products.prod_pic')->join('products','products.prod_id', '=', 'order_details.prod_id')
+       ->where('order_details.detail_id', $request->orderId)->get();
+       $rowNumber = 0;
+       $data = "";
+       $total = 0;
+        foreach($order as $item){
+            $rowNumber++;
+            $data .= "
+                <tr>
+                    <td class='fw-bold text-muted'>$rowNumber</td>
+                    <td><img class='img-fluid' style='height:80px;' src='$item->prod_pic'></td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>$item->prod_name</td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>₱ ". number_format($item->prod_price) ."</td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>$item->qty</td>
+                    <td class='fw-bold text-muted' style='font-size:14px;'>₱ ".number_format($item->total)."</td>
+                </tr>
+            ";
+            $total += $item->total;
+        }
+
+        return response()->json([
+            'data' => $data,
+            'total' => '₱ ' . number_format($total + 100)
+        ]);
+    }
+
     public function getCustomer(Request $request){
         $data = Orders::select('orders.created_at','users.name','users.address','users.phone')
         ->join('users','orders.user_id', '=', 'users.id')->where('orders.order_id', $request->orderId)->first();
@@ -265,7 +293,6 @@ class OrderController extends Controller
         return $pdf->stream('Completed Orders.pdf');
     }
 
-
     public function excelCompletedOrders(Request $request){
         return Excel::download(new completedOrders, 'Completed Orders.xlsx');
     }
@@ -285,5 +312,30 @@ class OrderController extends Controller
         $pdf = PDF::loadView('pdf.printOrders',  ['customer' => $customer,'order' => $order,'total' => $total])->setPaper('A4', 'portrait');
         return $pdf->stream('Orders.pdf');
      }
+
+    public function userOrder(){
+        $id = Auth::user()->id;
+
+        $order = Orders::select('orders.*','users.name')
+                    ->join('users','users.id','=','orders.user_id')
+                    ->where('orders.user_id','=',$id)
+                    ->get();
+
+        if($order->isNotEmpty()){
+            foreach($order as $item){
+               $item->action = '
+                    <button type="button" data-title="Order Delivered?" onclick=orderDelivered('.$item->order_id.') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3">
+                        <i class="bi bi-truck"></i>
+                    </button> 
+                    <a type="button" onclick=viewOrders('.$item->order_id.') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3">
+                        <i class="bi bi-view-stacked"></i>
+                    </a>';
+               $item->amount = '₱ '. number_format($item->total);
+               $item->date = date('M d, Y | g:i A', strtotime($item->created_at));
+            }
+        }
+
+        return response()->json($order);
+    }
 
 }

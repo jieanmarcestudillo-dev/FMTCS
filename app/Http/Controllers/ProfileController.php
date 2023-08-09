@@ -14,7 +14,13 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-
+    public function editAdmin(Request $request): View
+    {
+        return view('profile.editAdmin', [
+            'user' => $request->user(),
+        ]);
+    }
+    
     public function check_authenticated(){
         if(Auth::user()){
             return response()->json(['message'=>'success']);
@@ -29,6 +35,7 @@ class ProfileController extends Controller
         ]);
     }
 
+
     /**
      * Update the user's profile information.
      */
@@ -42,7 +49,11 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        if(Auth::user()->role == 'USER'){
+            return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        }else{
+            return Redirect::route('profile.editAdmin')->with('status', 'profile-updated');
+        }
     }
 
     /**

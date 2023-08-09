@@ -19,12 +19,12 @@
                 </li>
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="/viewProducts">Products</a>
-                </li>
+                </li> 
                 </ul>
 
-                <form class="d-flex mb-lg-0 mb-1">
-                    <input class="form-control rounded-0 ps-3 bg-body" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn rounded-0 px-3 py-2" type="submit"><i class="bi bi-search"></i></button>
+                <form class="d-flex mb-lg-0 mb-1" onsubmit="return false">
+                    <input class="form-control rounded-0 ps-3 bg-body" type="search" placeholder="Search" aria-label="Search" id="search_product_input">
+                    <button onclick="searchProduct()" class="btn rounded-0 px-3 py-2" type="button"><i class="bi bi-search"></i></button>
                 </form>
 
                 @if(Auth::check())
@@ -35,6 +35,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('viewOrder') }}">Order History</a></li>
                             <li><a class="dropdown-item">
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">

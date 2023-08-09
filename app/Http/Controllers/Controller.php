@@ -59,6 +59,14 @@ class Controller extends BaseController
             public function adminCompletedOrders(){
                 return view('admin.completedOrders');
             }
+
+            public function viewOrders(){
+                return view('orderHistory');
+            } 
+
+            public function viewUserOrderDetails(){
+                return view('userOrder');
+            }
         // ORDERS ROUTING
     // ADMIN ROUTING
 

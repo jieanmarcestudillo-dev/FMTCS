@@ -1,5 +1,19 @@
 window.onload = function(){
-	loadProducts();
+	// Get the current URL
+    var currentUrl = window.location.href;
+
+    // Create a URL object
+    var url = new URL(currentUrl);
+
+    // Get the value of the "id" parameter
+    var text = url.searchParams.get('text');
+
+    if(text !== null){
+    	loadSearchProducts(JSON.parse(text));
+    }else{
+    	loadProducts();
+    }
+	
 	loadFilters();
 }
 
@@ -18,6 +32,39 @@ function minusCount(){
 function loadProducts(){
 	$.ajax({
 		url:'/products/getAll',
+		success:function(data){
+
+			let size = Object.keys(data).length;
+			let productCard = "";
+			let product = document.getElementById('products_content');
+			let id = 0;
+		
+			for(let x = 0; x < size; x++){
+				let price = number_format(data[x].prod_price);
+				id = data[x].prod_id;
+				 productCard += `
+					<div class="card m-3 p-3 flex-grow-1" style="width:200px;">
+					    <img src="${data[x].prod_pic}" class="card-img-top" alt="Card Image" style="max-width: 200px; margin: 0 auto">
+					    <div class="card-body text-center">
+					        <h2 class="card-text text-center mt-0 fs-4 fw-bold">${data[x].prod_name}</h2>
+					        <p class="text-muted">${data[x].cat_name}</p>
+					        <h2 style="color:#0C25B6">Php ${price}</h2>
+					        <button type="button" style="background-color:#0C25B6" class="btn text-white rounded-0" onclick="view_product_details(${id})" data-bs-toggle="modal" data-bs-target="#addModal">View Product Details</button>
+					    </div>
+					</div>
+					`;
+			}
+			product.innerHTML = productCard;
+		}
+	})
+}
+
+function loadSearchProducts(text){
+	$.ajax({
+		url:'/products/getSearch',
+		data:{
+			text:text
+		},
 		success:function(data){
 
 			let size = Object.keys(data).length;
@@ -71,7 +118,7 @@ function loadFilters(){
 		success:function(data){
 			let category = document.getElementById('category_list');
 
-			let result = "";
+			let result = `<li><a onclick="loadFilteredProducts(0)">All</a></li>`;
 			let size = Object.keys(data).length;
 
 			for(let x = 0; x < size; x++){

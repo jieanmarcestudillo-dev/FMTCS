@@ -29,6 +29,7 @@ Route::get('dashboard', function () {
 Route::get('viewProducts', [Controller::class,'viewProducts'])->name('viewProducts');
 Route::get('viewCart', [Controller::class,'viewCart'])->name('viewCart');
 Route::get('/products/getAll', [ProductController::class, 'getAllProductsForUser']);
+Route::get('/products/getSearch', [ProductController::class, 'getSearchProducts']);
 Route::get('/products/getSorted', [ProductController::class, 'getSortedProducts']);
 Route::get('/products/getDetailsById', [ProductController::class, 'getProductsById']);
 Route::get('/products/getTopSales', [OrderDetailController::class, 'getTopSales']);
@@ -38,9 +39,15 @@ Route::get('/order/processOrder', [OrderController::class, 'processOrder']);
 Route::get('/order/onlinePayment', [OrderController::class, 'processOnlinePayment']);
 Route::get('category/getAll', [CategoryController::class, 'getCategories']);
 Route::get('/checkAuthenticated', [ProfileController::class, 'check_authenticated']);
+Route::get('viewOrder', [Controller::class, 'viewOrders'])->name('viewOrder');
+Route::get('viewUserOrderDetails', [Controller::class, 'viewUserOrderDetails'])->name('viewUserOrderDetails');
+Route::get('/order/userOrder', [OrderController::class, 'userOrder']);
+Route::get('/order/orderDelivered', [OrderController::class,'completeOrders']);
+Route::get('/order/orderDetails', [OrderController::class,'getOrderDetails2']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/edit-admin', [ProfileController::class, 'editAdmin'])->name('profile.editAdmin');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

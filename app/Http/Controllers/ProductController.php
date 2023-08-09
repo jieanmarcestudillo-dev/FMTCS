@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\App;
 use App\Models\Products;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -405,6 +406,17 @@ class ProductController extends Controller
         $result = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
             ->where('products.prod_qty','>',0)
+            ->get();
+        return response()->json($result);
+    }
+
+    public function getSearchProducts(Request $request){
+        $text = $request->input('text');
+        Log::info($text);
+        $result = Products::select('products.*','category.cat_name')
+            ->join('category','products.category', '=','category.cat_id')
+            ->where('products.prod_qty','>',0)
+            ->where('products.prod_name', 'LIKE', '%' . $text . '%')
             ->get();
         return response()->json($result);
     }
