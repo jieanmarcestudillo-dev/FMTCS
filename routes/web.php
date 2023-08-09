@@ -60,6 +60,9 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('adminCompletedOrders', [Controller::class,'adminCompletedOrders'])->name('adminCompletedOrders');
     Route::get('userLogout', [Controller::class,'userLogout'])->name('userLogout');
     Route::get('viewOrderDetails/', [OrderController::class,'viewOrderDetails']);
+    Route::get('printCompletedOrders/', [OrderController::class,'printCompletedOrders']);
+    Route::get('excelCompletedOrders/', [OrderController::class,'excelCompletedOrders']);
+    Route::get('printOrders/{id}', [OrderController::class,'printOrders']);
 });
 
 # ENDS HERE ADMIN ROUTES

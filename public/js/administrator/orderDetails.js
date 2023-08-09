@@ -39,39 +39,6 @@ $(document).ready(function(){
                 $("#getAllOrders").html(data);
             }
         })
-        // var table = $('#orderDetailsTable').DataTable({
-        //     "language": {
-        //         "emptyTable": "No Supplier Found"
-        //     },
-        //     "lengthChange": true,
-        //     "scrollCollapse": true,
-        //     "paging": true,
-        //     "info": true,
-        //     "responsive": true,
-        //     "ordering": false,
-        //     "aLengthMenu": [[25, 50, 75, -1], [25, 50, 75, "All"]],
-        //     "iDisplayLength": 25,
-        //     "ajax": {
-        //         "url": "api/getOrderDetails",
-        //         "data": { orderId: orderId },
-        //     },
-        //     "columns": [
-        //         { "data": "order_details_id" },
-        //         { "data": "prod_name" },
-        //         { "data": "prod_name" },
-        //         { "data": "prod_price" },
-        //         { "data": "qty" },
-        //         { "data": "total" }
-        //     ],
-        //     "order": [[1, 'asc']]
-        // });
-
-        // table.on('order.dt search.dt', function () {
-        //     let i = 1;
-        //     table.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
-        //         this.data(i++);
-        //     });
-        // }).draw();
     }
 // GET ORDERS
 

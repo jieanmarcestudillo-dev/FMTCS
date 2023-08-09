@@ -10,12 +10,37 @@ class ProductController extends Controller
 {
     public function getAllProducts(){
         $result = Products::select('products.*','category.cat_name','suppliers.supp_name')->join('category','products.category', '=','category.cat_id')
-        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->get();
+        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->orderBy('products.prod_qty')->get();
         if($result->isNotEmpty()){
             foreach($result as $item){
-                echo"
+                if($item->prod_qty >= 10){
+                    echo"
+                        <div class='col-6'>
+                            <div class='card mb-3 shadow bg-body' style='max-width: 540px; height: 300px;'>
+                                <div class='row g-0'>
+                                <div class='col-md-5 text-center p-3'>
+                                    <img src='$item->prod_pic' class='img-fluid rounded-start text-center' style='height: 100%; width:100%;'>
+                                </div>
+                                <div class='col-md-7'>
+                                    <div class='card-body lh-1'>
+                                    <p class='card-text text-muted'>Category: $item->cat_name</p>
+                                    <p class='card-text fw-bold fs-5'>$item->prod_name</p>
+                                    <p class='card-text lh-base'>$item->prod_desc</p>
+                                    <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
+                                    <p class='card-text'>Serial Number: $item->prod_serial</p>
+                                    <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
+                                    <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
+                                    <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    ";
+                }else{
+                    echo"
                     <div class='col-6'>
-                        <div class='card mb-3 shadow bg-body' style='max-width: 540px; height: 300px;'>
+                        <div class='card mb-3 bg-body' style='max-width: 540px; height: 300px; box-shadow: 0px 0px 5px rgba(255, 99, 71, 1) !important;'>
                             <div class='row g-0'>
                             <div class='col-md-5 text-center p-3'>
                                 <img src='$item->prod_pic' class='img-fluid rounded-start text-center' style='height: 100%; width:100%;'>
@@ -27,7 +52,7 @@ class ProductController extends Controller
                                 <p class='card-text lh-base'>$item->prod_desc</p>
                                 <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
                                 <p class='card-text'>Serial Number: $item->prod_serial</p>
-                                <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
+                                <p class='card-text'>Available Stocks: <span class='text-danger'>$item->prod_qty Total</span></p>
                                 <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
                                 <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
                                 </div>
@@ -36,6 +61,7 @@ class ProductController extends Controller
                         </div>
                     </div>
                 ";
+                }
             }
         }else{
             echo "
@@ -114,12 +140,37 @@ class ProductController extends Controller
 
     public function searchProducts(Request $request){
         $result = Products::select('products.*','category.cat_name','suppliers.supp_name')->join('category','products.category', '=','category.cat_id')
-        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->where('products.prod_serial', 'like', $request->certainProduct)->get();
+        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->where('products.prod_serial', 'like', $request->certainProduct)->orderBy('products.prod_qty')->get();
         if($result->isNotEmpty()){
             foreach($result as $item){
-                echo"
+                if($item->prod_qty >= 10){
+                    echo"
+                        <div class='col-6'>
+                            <div class='card mb-3 shadow bg-body' style='max-width: 540px; height: 300px;'>
+                                <div class='row g-0'>
+                                <div class='col-md-5 text-center p-3'>
+                                    <img src='$item->prod_pic' class='img-fluid rounded-start text-center' style='height: 100%; width:100%;'>
+                                </div>
+                                <div class='col-md-7'>
+                                    <div class='card-body lh-1'>
+                                    <p class='card-text text-muted'>Category: $item->cat_name</p>
+                                    <p class='card-text fw-bold fs-5'>$item->prod_name</p>
+                                    <p class='card-text lh-base'>$item->prod_desc</p>
+                                    <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
+                                    <p class='card-text'>Serial Number: $item->prod_serial</p>
+                                    <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
+                                    <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
+                                    <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    ";
+                }else{
+                    echo"
                     <div class='col-6'>
-                        <div class='card mb-3 shadow bg-body' style='max-width: 540px; height: 300px;'>
+                        <div class='card mb-3 bg-body' style='max-width: 540px; height: 300px; box-shadow: 0px 0px 5px rgba(255, 99, 71, 1) !important;'>
                             <div class='row g-0'>
                             <div class='col-md-5 text-center p-3'>
                                 <img src='$item->prod_pic' class='img-fluid rounded-start text-center' style='height: 100%; width:100%;'>
@@ -131,15 +182,16 @@ class ProductController extends Controller
                                 <p class='card-text lh-base'>$item->prod_desc</p>
                                 <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
                                 <p class='card-text'>Serial Number: $item->prod_serial</p>
-                                <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
-                                <button type='button' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
-                                <button type='button' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
+                                <p class='card-text'>Available Stocks: <span class='text-danger'>$item->prod_qty Total</span></p>
+                                <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
+                                <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
                                 </div>
                             </div>
                             </div>
                         </div>
                     </div>
                 ";
+                }
             }
         }else{
             echo "
@@ -154,12 +206,37 @@ class ProductController extends Controller
 
     public function sortByCategory(Request $request){
         $result = Products::select('products.*','category.cat_name','suppliers.supp_name')->join('category','products.category', '=','category.cat_id')
-        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->where('products.category', 'like', $request->category)->get();
+        ->join('suppliers','products.supplier', '=','suppliers.supp_id')->where('products.category', 'like', $request->category)->orderBy('products.prod_qty')->get();
         if($result->isNotEmpty()){
             foreach($result as $item){
-                echo"
+                if($item->prod_qty >= 10){
+                    echo"
+                        <div class='col-6'>
+                            <div class='card mb-3 shadow bg-body' style='max-width: 540px; height: 300px;'>
+                                <div class='row g-0'>
+                                <div class='col-md-5 text-center p-3'>
+                                    <img src='$item->prod_pic' class='img-fluid rounded-start text-center' style='height: 100%; width:100%;'>
+                                </div>
+                                <div class='col-md-7'>
+                                    <div class='card-body lh-1'>
+                                    <p class='card-text text-muted'>Category: $item->cat_name</p>
+                                    <p class='card-text fw-bold fs-5'>$item->prod_name</p>
+                                    <p class='card-text lh-base'>$item->prod_desc</p>
+                                    <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
+                                    <p class='card-text'>Serial Number: $item->prod_serial</p>
+                                    <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
+                                    <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
+                                    <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    ";
+                }else{
+                    echo"
                     <div class='col-6'>
-                        <div class='card mb-3 shadow bg-body' style='max-width: 540px; height: 300px;'>
+                        <div class='card mb-3 bg-body' style='max-width: 540px; height: 300px; box-shadow: 0px 0px 5px rgba(255, 99, 71, 1) !important;'>
                             <div class='row g-0'>
                             <div class='col-md-5 text-center p-3'>
                                 <img src='$item->prod_pic' class='img-fluid rounded-start text-center' style='height: 100%; width:100%;'>
@@ -171,15 +248,16 @@ class ProductController extends Controller
                                 <p class='card-text lh-base'>$item->prod_desc</p>
                                 <p class='card-text fw-bold' style='color:  #0C25B6;'>Price: Php $item->prod_price</p>
                                 <p class='card-text'>Serial Number: $item->prod_serial</p>
-                                <p class='card-text'>Available Stocks: $item->prod_qty Total</p>
-                                <button type='button' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
-                                <button type='button' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
+                                <p class='card-text'>Available Stocks: <span class='text-danger'>$item->prod_qty Total</span></p>
+                                <button type='button' onclick='updateProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Update</button>
+                                <button type='button' onclick='deleteProduct($item->prod_id)' style='background-color:#0C25B6' class='btn text-white rounded-0 btn-sm'>Remove</button>
                                 </div>
                             </div>
                             </div>
                         </div>
                     </div>
                 ";
+                }
             }
         }else{
             echo "

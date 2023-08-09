@@ -9,7 +9,9 @@ use App\Models\Products;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Exports\completedOrders;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -129,7 +131,7 @@ class OrderController extends Controller
             for($x = 0; $x < $size; $x++){
 
                 $products = Products::find($cart[$x]->item_id);
-                
+
                 if($products){
                     $products->prod_qty = intval($products->prod_qty) - intval($cart[$x]->item_qty);
                     $products->save();
@@ -253,14 +255,35 @@ class OrderController extends Controller
 
     public function printCompletedOrders(Request $request){
         $order = Orders::select('orders.*','users.name','users.address','users.phone')
-        ->join('users','orders.user_id', '=', 'users.id')->get();
+        ->join('users','orders.user_id', '=', 'users.id')->orderBy('orders.created_at' , 'DESC')->get();
         foreach($order as $item){
             $completedOrders = [
-                'data' => $data
+                'data' => $order
             ];
         }
-        $pdf = PDF::loadView('fetch.admin.printOperation', $completedOrders)->setPaper('A4', 'portrait');
+        $pdf = PDF::loadView('pdf.printCompletedOrders', $completedOrders)->setPaper('A4', 'portrait');
         return $pdf->stream('Completed Orders.pdf');
     }
+
+
+    public function excelCompletedOrders(Request $request){
+        return Excel::download(new completedOrders, 'Completed Orders.xlsx');
+    }
+
+
+    public function printOrders(Request $request, $id){
+        $customer = Orders::select('orders.created_at','users.name','users.address','users.phone')
+        ->join('users','orders.user_id', '=', 'users.id')->where('orders.order_id', $id)->first();
+
+        $order = OrderDetail::select('order_details.order_details_id','order_details.qty','order_details.price','order_details.total','products.prod_name',
+        'products.prod_price','products.prod_pic')->join('products','products.prod_id', '=', 'order_details.prod_id')
+        ->where('order_details.detail_id', $id)->get();
+
+        $data = OrderDetail::where('detail_id', $id)->sum('price');
+        $total = $data + 100;
+
+        $pdf = PDF::loadView('pdf.printOrders',  ['customer' => $customer,'order' => $order,'total' => $total])->setPaper('A4', 'portrait');
+        return $pdf->stream('Orders.pdf');
+     }
 
 }

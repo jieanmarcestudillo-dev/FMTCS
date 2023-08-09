@@ -3,7 +3,6 @@ $(document).ready(function(){
     toShipOrders();
     toReceivedOrders();
     completedOrders();
-    getCustomer();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -146,12 +145,9 @@ $(document).ready(function(){
                 },
                 "targets": 1
                 },
-                {
-                    "data": "order_id",
-                    mRender: function (data, type, row) {
-                        return '<a type="button" onclick=viewOrders(' + data + ') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a>';
-                    }
-                }
+                { "mData": function (data, type, row) {
+                    return '<a type="button" onclick="viewOrders(' + data.order_id + ')" data-title="View This Order?" class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a> <a href="printOrders/' + data.order_id + '" role="button" data-title="Print This Order?" class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3"><i class="bi bi-file-earmark"></i></a>';
+                }},
             ],
             get "columns"() {
                 return this["_columns"];
@@ -199,12 +195,10 @@ $(document).ready(function(){
                 },
                 "targets": 1
                 },
-                {
-                    "data": "order_id ",
-                    mRender: function (data, type, row) {
-                        return '<button type="button" data-title="View Orders?" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-box"></i></button> <a type="button" onclick=shipOrders(' + data + ') class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3" data-title="Print Orders?"><i class="bi bi-filetype-pdf"></i></a>';
-                    }
-                }
+                { "mData": function (data, type, row) {
+                    return '<a type="button" onclick="viewOrders(' + data.order_id + ')" data-title="View This Order?" class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3"><i class="bi bi-view-stacked"></i></a> <a href="printOrders/' + data.order_id + '" role="button" data-title="Print This Order?" class="btn rounded-0 btn-outline-primary btn-sm py-2 px-3"><i class="bi bi-file-earmark"></i></a>';
+                }},
+
             ],
             get "columns"() {
                 return this["_columns"];
@@ -259,43 +253,43 @@ $(document).ready(function(){
 
 
 // UPDATE TO SHIP ORDERS
-function inTransitOrders(id){
-    Swal.fire({
-    title: 'Are you sure?',
-    text: "In Transit this order?",
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonColor: '#0C25B6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, continue'
-    }).then((result) => {
-    if (result.isConfirmed) {
-        $.ajax({
-        url: 'api/toReceivedOrders',
-        type: 'POST',
-        dataType: 'json',
-        data: {order_id: id},
-    });
-    Swal.fire({
-        title: 'In Transit Successfully',
-        text: "Orders was in transit successfully",
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 1500,
-    }).then((result) => {
-    if (result) {
-        $('#toShipTable').DataTable().ajax.reload();
+    function inTransitOrders(id){
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "In Transit this order?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#0C25B6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, continue'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+            url: 'api/toReceivedOrders',
+            type: 'POST',
+            dataType: 'json',
+            data: {order_id: id},
+        });
+        Swal.fire({
+            title: 'In Transit Successfully',
+            text: "Orders was in transit successfully",
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500,
+        }).then((result) => {
+        if (result) {
+            $('#toShipTable').DataTable().ajax.reload();
+        }
+        });
+        }
+        });
     }
-    });
-    }
-    });
-}
 // UPDATE TO SHIP ORDERS
 
 
 // VIEW ORDERS
-    function viewOrders(id){
-        localStorage.setItem('orderId', id);
+    function viewOrders(order_id){
+        localStorage.setItem('orderId', order_id);
         window.location.href = '/viewOrderDetails';
     }
 // VIEW ORDERS
