@@ -19,5 +19,9 @@
         <a type="button" class="btn btn-sm" id="logout" data-title="Logout?">
             <i class="bi bi-box-arrow-left fs-4"></i>
         </a>
+        <form method="POST" action="{{ route('logout') }}" hidden>
+            @csrf
+            <button id="logoutBtn" style="background-color:transparent; color:#0C25B6; border:none;" type="submit" onclick="event.preventDefault(); this.closest('form').submit();">Log Out</button>
+        </form></a>
     </div>
 </div>

@@ -409,6 +409,12 @@ class ProductController extends Controller
         return response()->json($result);
     }
 
+    public function getOutofStocks(){
+        $result = Products::where('products.prod_qty','<=',10)
+            ->get();
+        return response()->json($result);
+    }
+
     public function getSearchProducts(Request $request){
         $text = $request->input('text');
         Log::info($text);

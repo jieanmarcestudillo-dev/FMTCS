@@ -10,23 +10,7 @@ $(document).ready(function(){
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                sessionStorage.clear()
-                window.localStorage.clear();
-                $.ajax({
-                    type: 'GET',
-                    url: "/userLogout",
-                    success: function(response){
-                        if(response == 1){
-                            window.location = "/login";
-                        }
-                        else{
-                            Swal.fire({
-                            icon: 'error',
-                            title: 'Logout Failed',
-                        })
-                        }
-                    }
-                })
+                document.getElementById('logoutBtn').click();
             }
         })
     });

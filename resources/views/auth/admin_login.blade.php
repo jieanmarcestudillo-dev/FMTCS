@@ -25,8 +25,8 @@
             <div class="container">
                 <a class='homeButton' href="/" data-title='Back to Home?'><i class="bi bi-house"></i></a>
                 <img class="img-thumbnail border-0 logo" src="{{ URL('/image/frontend/FMTCS.jpg')}}">
-                <p class="title mt-lg-3">CUSTOMER PORTAL</p>
-                <form method="POST" action="{{ route('login') }}">
+                <p class="title mt-lg-3">ADMIN PORTAL</p>
+                <form method="POST" action="{{ route('admin.login') }}">
                     @csrf
                     <div class="form-floating mb-3">
                         <x-text-input class="form-control" placeholder="Email" id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username"/>
@@ -50,9 +50,6 @@
                         <li class="nav-item"><a href="{{ route('password.request') }}" class="nav-link">Forgot Password?</a></li>
                     </ul>
                         <button type="submit" class="btn">LOGIN</button>
-                    <ul class="navbar-nav text-center">
-                        <li class="nav-item"><a href="/register" class="nav-link bottomLink">Create Your Account</a></li>
-                    </ul>
                 </form>
             </div>
         </section>

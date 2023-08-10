@@ -58,6 +58,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::post('deleteProduct', [ProductController::class,'deleteProduct']);
         Route::get('showProduct', [ProductController::class,'showProduct']);
         Route::post('updateProduct', [ProductController::class,'updateProduct']);
+        Route::get('outOfStocks', [ProductController::class, 'getOutofStocks']);
     // PRODUCT PAGE
 
     // SUPPLIER PAGE

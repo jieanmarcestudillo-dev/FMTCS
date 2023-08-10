@@ -19,28 +19,24 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
+    public function admin_create(): View
+    {
+        return view('auth.admin_login');
+    }
+
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
         $request->session()->regenerate();
 
         if (Auth::check()) {
-            if(Auth::user()->email_verified_at !== NULL){
-                if (Auth::user()->role === 'ADMIN') {
-                    Log::info(1);
-                    return redirect()->route('adminDashboard');
-                } else {
-                    Log::info(2);
-                    return redirect()->route('welcome');
-                }
+            if(Auth::user()->email_verified_at !== NULL && Auth::user()->role === 'USER'){
+                return redirect()->route('welcome');
             }else{
                 Auth::guard('web')->logout();
-
                 $request->session()->invalidate();
-
                 $request->session()->regenerateToken();
-
-                Session::put('user_email_is_verified','not_verified');
+                Session::put('valid_account','not_valid');
                 return redirect()->route('login');
             }
         } else {
@@ -49,15 +45,49 @@ class AuthenticatedSessionController extends Controller
         }
     }
 
+    public function admin_store(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $request->session()->regenerate();
+
+        if (Auth::check()) {
+            if(Auth::user()->email_verified_at !== NULL && Auth::user()->role === 'ADMIN'){
+                return redirect()->route('adminDashboard');
+            }else{
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                Session::put('valid_account','not_valid');
+                return redirect()->route('adminlogin');
+            }
+        } else {
+            Log::info(3);
+            return redirect()->route('admin');
+        }
+    }
+
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
+        if(Auth::user()->role == 'ADMIN'){
+            Log::info('f');
+            Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
 
-        return redirect('/');
+            return redirect('/admin');
+        }else{
+            Log::info('1');
+            Auth::guard('web')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+
+            return redirect('/');
+        }
+        
     }
 
 

@@ -78,6 +78,7 @@
     <!-- JS -->
         <script src="{{ asset('/js/administrator/orders.js') }}"></script>
         <script src="{{ asset('/js/sideBar.js') }}"></script>
+        <script src="{{ asset('/js/logout.js') }}"></script>
         <script src="{{ asset('/js/dateTime.js') }}"></script>
     <!-- JS -->
 </body>

@@ -7,7 +7,24 @@ $(document).ready(function(){
     getAllCategory();
     getAllSuppliers();
     getAllProducts();
+    getOutofStocks();
 });
+
+function getOutofStocks(){
+    $.ajax({
+        url:'api/outOfStocks',
+        success:function(result){
+            console.log(result);
+            if(result.length > 0){
+                Swal.fire({
+                    icon:'info',
+                    title:'Out of stock NOTICE!',
+                    text:'We are running low on some of the items'
+                })
+            }
+        }
+    })
+}
 
 // GET CATEGORY FOR DROPDOWN
     function getAllCategory(){

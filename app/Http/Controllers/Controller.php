@@ -69,16 +69,6 @@ class Controller extends BaseController
             }
         // ORDERS ROUTING
     // ADMIN ROUTING
-
-
-
-    // USER LOGOUT
-    public function userLogout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        return response()->json(1);
-    }
 }
 
 
