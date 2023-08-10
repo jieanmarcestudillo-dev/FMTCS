@@ -107,7 +107,7 @@ class OrderController extends Controller
 
     public function getCompletedOrders(Request $request){
         $data = Orders::select('orders.*','users.name','users.phone')
-        ->join('users','orders.user_id', '=', 'users.id')->where('status','=','COMPLETED')->orderBy('orders.created_at', 'DESC')->get();
+        ->join('users','orders.user_id', '=', 'users.id')->where('status','=','COMPLETE')->orderBy('orders.created_at', 'DESC')->get();
         return response()->json($data);
     }
 

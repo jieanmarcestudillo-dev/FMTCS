@@ -364,7 +364,6 @@ class ProductController extends Controller
     }
 
     public function getProductByCategory(Request $request){
-
         if($request->input('category_id') == 0){
             $product = Products::select('products.*','category.cat_name')
             ->join('category','products.category', '=','category.cat_id')
