@@ -46,6 +46,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         Route::get('totalSales', [DashboardController::class,'totalSales']);
         Route::get('totalProductsSold', [DashboardController::class,'totalProductsSold']);
         Route::get('totalProducts', [DashboardController::class,'totalProducts']);
+        Route::get('graph', [DashboardController::class,'graph']);
     // DASHBOARD PAGE
 
     // PRODUCT PAGE

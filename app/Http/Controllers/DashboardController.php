@@ -25,4 +25,21 @@ class DashboardController extends Controller
         $data = OrderDetail::sum('price');
         return response()->json($data != '' ? '₱'.$data.'.00' : '0');
     }
+
+    public function graph(Request $request){
+        $monthNames = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        $orders = OrderDetail::selectRaw('DATE_FORMAT(created_at, "%M") as monthName,  SUM(price) as totalSales')
+            ->groupBy('monthName')->orderByRaw('MONTH(created_at)')->get()->keyBy('monthName')->map(fn($data) => $data->totalSales)->toArray();
+
+        $formattedOrders = array_replace(array_fill_keys($monthNames, 0), $orders);
+
+        $response = ['months' => $monthNames,'sales' => array_values($formattedOrders),];
+
+        return response()->json($response);
+
+    }
 }

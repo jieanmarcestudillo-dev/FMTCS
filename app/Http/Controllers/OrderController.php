@@ -326,7 +326,7 @@ class OrderController extends Controller
                $item->action = '
                     <button type="button" data-title="Order Delivered?" onclick=orderDelivered('.$item->order_id.') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3">
                         <i class="bi bi-truck"></i>
-                    </button> 
+                    </button>
                     <a type="button" onclick=viewOrders('.$item->order_id.') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3">
                         <i class="bi bi-view-stacked"></i>
                     </a>';

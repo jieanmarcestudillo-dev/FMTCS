@@ -86,35 +86,8 @@
                             </div>
                             <div class="row ps-3 pe-2">
                                 <div class="card shadow ps-3 py-5">
-                                    <canvas id="myChart"></canvas>
+                                    <canvas id="soldItems"></canvas>
                                 </div>
-                                <script>
-                                const ctx = document.getElementById('myChart');
-                                new Chart(ctx, {
-                                    type: 'line',
-                                    data: {
-                                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                    datasets: [{
-                                        label: 'Sold Items Per Month',
-                                        data: [12, 19, 3, 5, 2, 3,6,10,20, 8, 3, 20],
-                                        borderWidth: 1,
-                                        backgroundColor: [
-                                            '#0C25B6',
-                                        ],
-                                        borderColor: [
-                                            '#0c26b65e',
-                                        ],
-                                    }]
-                                    },
-                                    options: {
-                                    scales: {
-                                        y: {
-                                        beginAtZero: true
-                                        }
-                                    }
-                                    }
-                                });
-                                </script>
                             </div>
                         </div>
                     </div>
