@@ -323,15 +323,25 @@ class OrderController extends Controller
 
         if($order->isNotEmpty()){
             foreach($order as $item){
-               $item->action = '
-                    <button type="button" data-title="Order Delivered?" onclick=orderDelivered('.$item->order_id.') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3">
-                        <i class="bi bi-truck"></i>
-                    </button>
-                    <a type="button" onclick=viewOrders('.$item->order_id.') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3">
-                        <i class="bi bi-view-stacked"></i>
-                    </a>';
-               $item->amount = '₱ '. number_format($item->total);
-               $item->date = date('M d, Y | g:i A', strtotime($item->created_at));
+                if($item->status == 'TO RECEIVED'){
+                    $item->action = '
+                        <button type="button" data-title="Order Delivered?" onclick=orderDelivered('.$item->order_id.') class="btn rounded-0 btn-outline-success btn-sm py-2 px-3">
+                            <i class="bi bi-truck"></i>
+                        </button>
+                        <a type="button" onclick=viewOrders('.$item->order_id.') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3">
+                            <i class="bi bi-view-stacked"></i>
+                        </a>';
+                   $item->amount = '₱ '. number_format($item->total);
+                   $item->date = date('M d, Y | g:i A', strtotime($item->created_at));
+               }else{
+                    $item->action = '
+                        <a type="button" onclick=viewOrders('.$item->order_id.') data-title="View This Order?"  class="btn rounded-0 btn-outline-secondary btn-sm py-2 px-3">
+                            <i class="bi bi-view-stacked"></i>
+                        </a>';
+                   $item->amount = '₱ '. number_format($item->total);
+                   $item->date = date('M d, Y | g:i A', strtotime($item->created_at));
+               }
+               
             }
         }
 
