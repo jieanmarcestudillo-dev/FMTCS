@@ -19,7 +19,7 @@
                 <p class="text-muted" id="details_category"></p>
                 <input type="text" name="" id="details_id" hidden>
                 <h2 class="card-text mt-0 fs-4 fw-bold" id="details_name">GEARS</h2>
-                <h2 style="color:#0C25B6">Php <span id="details_price"></span></h2>
+                <h2 style="color:#0C25B6"><span id="details_price"></span></h2>
                 <p class="text-muted">Items in Stock: <span id="details_stock"></span></p>
                 <p style="text-align:justify;" id="details_description">
                 </p>

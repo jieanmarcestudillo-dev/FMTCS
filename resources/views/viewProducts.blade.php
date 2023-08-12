@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ URL('/image/frontend/FMTCS.jpg')}}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{asset('/css/input.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/css/products.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/products1.css')}}">
     <title>FMTCS</title>
     @include('global')
 </head>

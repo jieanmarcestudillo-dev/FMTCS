@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('/css/welcome.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/products1.css')}}">
     <link rel="shortcut icon" href="{{ URL('/image/frontend/FMTCS.jpg')}}" type="image/x-icon">
     <title>FMTCS</title>
     @include('global')
