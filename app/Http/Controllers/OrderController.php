@@ -341,7 +341,7 @@ class OrderController extends Controller
                    $item->amount = '₱ '. number_format($item->total);
                    $item->date = date('M d, Y | g:i A', strtotime($item->created_at));
                }
-               
+
             }
         }
 

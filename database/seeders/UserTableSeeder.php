@@ -14,7 +14,6 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        
         User::factory()->create([
             'name' => 'Test Admin',
             'email' => 'admin.fmtcs@gmail.com',
@@ -34,6 +33,5 @@ class UserTableSeeder extends Seeder
             'phone' => '09999999999',
             'email_verified_at' => date('Y-m-d H:i:s')
         ]);
-
     }
 }

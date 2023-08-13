@@ -71,6 +71,7 @@ $(document).ready(function(){
                 processData: false,
                 success:function(response){
                     if(response == 1){
+                        $('#addSupplier').modal('hide');
                         $("#addSupplierForm").trigger("reset");
                         $('#supplierTable').DataTable().ajax.reload();
                         Swal.fire({
@@ -166,6 +167,7 @@ $(document).ready(function(){
                 processData: false,
                 success:function(response){
                     if(response == 1){
+                        $('#updateSupplierModal').modal('hide');
                         $('#supplierTable').DataTable().ajax.reload();
                         Swal.fire({
                             position: 'center',

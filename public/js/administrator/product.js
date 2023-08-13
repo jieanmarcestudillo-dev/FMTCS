@@ -14,7 +14,6 @@ function getOutofStocks(){
     $.ajax({
         url:'api/outOfStocks',
         success:function(result){
-            console.log(result);
             if(result.length > 0){
                 Swal.fire({
                     icon:'info',
@@ -87,6 +86,7 @@ function getOutofStocks(){
                 success:function(response){
                     if(response == 1){
                         getAllProducts();
+                        $('#addProduct').modal('hide');
                         $("#addProductForm").trigger("reset");
                         Swal.fire({
                             position: 'center',
@@ -232,6 +232,7 @@ function getOutofStocks(){
                 processData: false,
                 success:function(response){
                     if(response == 1){
+                        $('#showProductModal').modal('hide');
                         const input = document.getElementById("itemImage");
                         input.value = "";
                         getAllProducts();

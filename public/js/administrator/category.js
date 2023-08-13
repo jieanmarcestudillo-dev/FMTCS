@@ -36,6 +36,7 @@ $(document).ready(function(){
                 processData: false,
                 success:function(response){
                     if(response == 1){
+                        $('#addCategory').modal('hide');
                         getAllCategories();
                         $("#addCategoryForm").trigger("reset");
                         Swal.fire({
@@ -130,6 +131,7 @@ $(document).ready(function(){
             processData: false,
             success:function(response){
                 if(response == 1){
+                    $('#showCategoryModal').modal('hide');
                     const input = document.getElementById("categoryPhotos");
                     input.value = "";
                     getAllCategories();

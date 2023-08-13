@@ -410,8 +410,7 @@ class ProductController extends Controller
     }
 
     public function getOutofStocks(){
-        $result = Products::where('products.prod_qty','<=',10)
-            ->get();
+        $result = Products::where('products.prod_qty','<=',10)->get();
         return response()->json($result);
     }
 
