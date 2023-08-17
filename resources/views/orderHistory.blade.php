@@ -39,6 +39,7 @@
                                         <th class="text-center">Total</th>
                                         <th class="text-center">Date</th>
                                         <th class="text-center">Status</th>
+                                        <th class="text-center">Payment</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>

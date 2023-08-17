@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('track_num');
             $table->string('status');
+            $table->enum('payment',['COD','ONLINE']);
             $table->integer('total');
             $table->timestamps();
         });

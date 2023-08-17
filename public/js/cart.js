@@ -143,7 +143,8 @@ function check_out(){
 			url:'order/processOrder',
 			data:{
 				total:total,
-				order:orders
+				order:orders,
+				payment:'COD'
 			},
 			success:function(result){
 
@@ -190,7 +191,8 @@ function check_out2(){
 			url:'order/processOrder',
 			data:{
 				total:total,
-				order:orders
+				order:orders,
+				payment:'ONLINE'
 			},
 			success:function(result){
 

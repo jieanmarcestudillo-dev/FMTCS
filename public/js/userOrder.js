@@ -17,6 +17,7 @@ function loadOrders(){
             {data: 'amount'},
             {data: 'date'},
             {data: 'status'},
+            {data: 'payment'},
             {data: 'action'}
         ]
     });

@@ -17,6 +17,7 @@ class Orders extends Model
         'user_id',
         'track_num',
         'status',
+        'payment',
         'total'
     ];
 }   

@@ -115,6 +115,7 @@ class OrderController extends Controller
 
         $total = $request->input('total');
         $cart = json_decode($request->input('order'));
+        $payment = $request->input('payment');
 
         $size = sizeof($cart);
 
@@ -123,6 +124,7 @@ class OrderController extends Controller
         $orders->user_id = Auth::user()->id;
         $orders->track_num = 'ORD' . Auth::user()->id . time();
         $orders->status = 'PENDING';
+        $orders->payment = $payment;
         $orders->total = $total;
 
         if($orders->save()){
