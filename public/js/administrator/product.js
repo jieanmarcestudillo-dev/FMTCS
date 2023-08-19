@@ -91,7 +91,7 @@ function getOutofStocks(){
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'NEW CATEGORY HAS BEEN STORED',
+                            title: 'NEW PRODUCT HAS BEEN STORED',
                             showConfirmButton: false,
                             timer: 1500
                         });

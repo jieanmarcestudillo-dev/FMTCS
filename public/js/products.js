@@ -13,17 +13,17 @@ window.onload = function(){
     }else{
     	loadProducts();
     }
-	
+
 	loadFilters();
 }
 
 function addCount(){
-	let details = document.getElementById('product_count'); 
+	let details = document.getElementById('product_count');
 	details.value = parseInt(details.value) + 1;
 }
 
 function minusCount(){
-	let details = document.getElementById('product_count'); 
+	let details = document.getElementById('product_count');
 	if(details.value > 0){
 		details.value = parseInt(details.value) - 1;
 	}
@@ -38,7 +38,7 @@ function loadProducts(){
 			let productCard = "";
 			let product = document.getElementById('products_content');
 			let id = 0;
-		
+
 			for(let x = 0; x < size; x++){
 				let price = number_format(data[x].prod_price);
 				id = data[x].prod_id;
@@ -71,7 +71,7 @@ function loadSearchProducts(text){
 			let productCard = "";
 			let product = document.getElementById('products_content');
 			let id = 0;
-		
+
 			for(let x = 0; x < size; x++){
 				let price = number_format(data[x].prod_price);
 				id = data[x].prod_id;
@@ -195,7 +195,6 @@ function sort_products(value){
 }
 
 function addToCart(){
-
 	$.ajax({
 		url:'/checkAuthenticated',
 		success:function(result){

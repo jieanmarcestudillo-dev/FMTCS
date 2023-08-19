@@ -6,7 +6,7 @@ function loadShoppingCart(){
 
 	let item = JSON.parse(localStorage.getItem('cart'));
 	let checkout = document.getElementById('cartCheckout');
-	
+
 
 	let cartList = document.getElementById('cartList');
 
@@ -69,7 +69,7 @@ function loadShoppingCart(){
 		cartList.innerHTML = '';
 		checkout.style.display = 'none';
 	}
-	
+
 }
 
 function addedCart(id){
@@ -138,7 +138,6 @@ function check_out(){
 			text:'Select your payment method'
 		})
 	}else if(payment_type == 1){
-
 		$.ajax({
 			url:'order/processOrder',
 			data:{
@@ -186,7 +185,7 @@ function check_out2(){
 	let shipping_fee = parseInt(localStorage.getItem('fee'));
 	total += shipping_fee;
 	console.log(total);
-	
+
 		$.ajax({
 			url:'order/processOrder',
 			data:{

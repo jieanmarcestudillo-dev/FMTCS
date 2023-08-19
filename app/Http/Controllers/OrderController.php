@@ -231,7 +231,7 @@ class OrderController extends Controller
     }
 
     public function getTotal(Request $request){
-        $data = OrderDetail::where('detail_id', $request->orderId)->sum('price');
+        $data = OrderDetail::where('detail_id', $request->orderId)->sum('total');
         $total = $data + 100;
         return response()->json('Php '.$total.'.00');
     }
@@ -308,7 +308,7 @@ class OrderController extends Controller
         'products.prod_price','products.prod_pic')->join('products','products.prod_id', '=', 'order_details.prod_id')
         ->where('order_details.detail_id', $id)->get();
 
-        $data = OrderDetail::where('detail_id', $id)->sum('price');
+        $data = OrderDetail::where('detail_id', $id)->sum('total');
         $total = $data + 100;
 
         $pdf = PDF::loadView('pdf.printOrders',  ['customer' => $customer,'order' => $order,'total' => $total])->setPaper('A4', 'portrait');

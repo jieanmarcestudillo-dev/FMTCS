@@ -79,9 +79,11 @@ class SupplierController extends Controller
         // MARVIN BACKEND
 
         // NEW BACKEND
-            return response()->json(Suppliers::where('supp_id', '=' ,$request->supp_id)->update(
-            ['supp_name' => $request->fullname],['supp_address' => $request->address],['supp_contact' => $request->contact],
-            ['supp_email' => $request->email]) ? 1 : 0);
+            return response()->json(  $updated = Suppliers::where('supp_id', $request->supp_id)->update([
+                'supp_name' => $request->fullname,
+                'supp_address' => $request->address,
+                'supp_contact' => $request->contact,
+                'supp_email' => $request->email]) ? 1 : 0);
         // NEW BACKEND
     }
 
